@@ -2947,6 +2947,53 @@ document.head.appendChild(a);
   }, { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
+  // Block automatic ViewContent fired by third-party pixel helpers.
+  (function () {
+    if (window._paViewContentGateStarted) return;
+    window._paViewContentGateStarted = true;
+
+    function installGate() {
+      if (window._paViewContentGateInstalled) return true;
+      if (typeof window.fbq !== 'function') return false;
+
+      const originalFbq = window.fbq;
+      const gatedFbq = function () {
+        const eventType = arguments[0];
+        const eventName = arguments[1];
+
+        if (
+          eventType === 'track' &&
+          eventName === 'ViewContent' &&
+          !window._paAllowOfferViewContent
+        ) {
+          window._paBlockedViewContentCount = (window._paBlockedViewContentCount || 0) + 1;
+          return;
+        }
+
+        return originalFbq.apply(this, arguments);
+      };
+
+      ['callMethod', 'queue', 'push', 'loaded', 'version'].forEach(function (key) {
+        if (originalFbq[key] !== undefined) gatedFbq[key] = originalFbq[key];
+      });
+
+      window.fbq = gatedFbq;
+      window._fbq = gatedFbq;
+      window._paViewContentGateInstalled = true;
+      return true;
+    }
+
+    if (installGate()) return;
+
+    let attempts = 0;
+    const gateRetry = setInterval(function () {
+      attempts += 1;
+      if (installGate() || attempts >= 120) {
+        clearInterval(gateRetry);
+      }
+    }, 100);
+  })();
+
   // Meta Pixel ViewContent — only when the offer block is actually viewed.
   (function () {
     const offer = document.getElementById('offer');
@@ -2968,7 +3015,12 @@ document.head.appendChild(a);
       if (sent) return true;
       if (typeof window.fbq !== 'function') return false;
 
-      window.fbq('track', 'ViewContent', payload);
+      window._paAllowOfferViewContent = true;
+      try {
+        window.fbq('track', 'ViewContent', payload);
+      } finally {
+        window._paAllowOfferViewContent = false;
+      }
       sent = true;
       return true;
     }
