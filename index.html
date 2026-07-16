@@ -1,0 +1,3185 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>O Ateliê de Papel · Ritual de bordado em papel para desacelerar à noite</title>
+<meta name="description" content="Um ritual analógico, calmo e longe das telas para desacelerar à noite com bordado em papel. Receba moldes prontos para imprimir e comece sem experiência.">
+<meta name="theme-color" content="#3d5a47"><link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,400,0..100;0,9..144,500,0..100;0,9..144,600,0..100;0,9..144,700,0..100;1,9..144,400,0..100;1,9..144,500,0..100&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ─────────────────────────────────────────────
+     DESIGN TOKENS — O Ateliê de Papel
+     Strategy: Committed. Sage carries the brand,
+     terracotta is the single CTA accent,
+     blush is supporting warmth.
+     All neutrals tinted toward sage hue.
+     ───────────────────────────────────────────── */
+  :root {
+    /* Surface neutrals — tinted toward sage 140° */
+    --paper:        oklch(98.5% 0.008 110);   /* page background */
+    --paper-warm:   oklch(96.8% 0.012 80);    /* sections, warm cream */
+    --paper-deep:   oklch(94.2% 0.018 95);    /* dividers, raised */
+    --linen:        oklch(91.5% 0.020 90);    /* borders, subtle fills */
+
+    /* Brand sage — the committed color */
+    --sage:         oklch(52% 0.055 145);     /* primary text/brand */
+    --sage-deep:    oklch(38% 0.045 145);     /* headings, dark surfaces */
+    --sage-soft:    oklch(72% 0.045 145);     /* muted accents */
+    --sage-wash:    oklch(94% 0.020 145);     /* tinted backgrounds */
+
+    /* Terracotta — single CTA accent, ~5% of surface */
+    --terracotta:        oklch(58% 0.130 35);
+    --terracotta-deep:   oklch(48% 0.140 32);
+    --terracotta-soft:   oklch(85% 0.060 40);
+
+    /* Blush — supporting warmth, used sparingly */
+    --blush:        oklch(88% 0.035 25);
+    --blush-soft:   oklch(94% 0.020 25);
+
+    /* Text */
+    --ink:          oklch(22% 0.012 145);     /* near-black, sage-tinted */
+    --ink-soft:     oklch(38% 0.018 145);
+    --ink-mute:     oklch(55% 0.015 145);
+
+    /* Functional */
+    --gold:         oklch(72% 0.115 80);      /* stars only */
+    --ok:           oklch(58% 0.085 150);     /* checkmarks */
+
+    /* Geometry */
+    --r-sm: 6px;
+    --r:    12px;
+    --r-lg: 20px;
+    --r-xl: 28px;
+
+    /* Motion */
+    --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+    --ease-out-expo:  cubic-bezier(0.16, 1, 0.3, 1);
+
+    /* Type scale — 1.25 ratio minimum between steps */
+    --t-xs:   13px;
+    --t-sm:   15px;
+    --t-base: 17px;
+    --t-lg:   20px;
+    --t-xl:   26px;
+    --t-2xl:  34px;
+    --t-3xl:  46px;
+    --t-4xl:  62px;
+    --t-5xl:  84px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
+
+  html {
+    scroll-behavior: smooth;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: var(--t-base);
+    line-height: 1.55;
+    color: var(--ink);
+    background-color: var(--paper);
+    background-image:
+      radial-gradient(circle at 1px 1px, oklch(58% 0.045 145 / 0.06) 1px, transparent 0);
+    background-size: 24px 24px;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  header,
+  section,
+  footer {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: clip;
+  }
+  @supports not (overflow: clip) {
+    header,
+    section,
+    footer {
+      overflow-x: hidden;
+    }
+  }
+
+  /* Editorial serif for display type */
+  .serif, h1, h2, h3, .display {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    line-height: 1.08;
+  }
+
+  h1 { font-size: var(--t-4xl); font-weight: 400; }
+  h2 { font-size: var(--t-3xl); font-weight: 500; }
+  h3 { font-size: var(--t-xl); font-weight: 500; line-height: 1.25; }
+
+  h1, h2, h3, p, li, a, button {
+    overflow-wrap: break-word;
+  }
+  p { max-width: 62ch; }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+
+  /* ─────────────────────────────────────────────
+     LAYOUT WRAPPERS
+     ───────────────────────────────────────────── */
+  .wrap { width: 100%; max-width: 1180px; margin: 0 auto; padding: 0 28px; }
+  .wrap-narrow { width: 100%; max-width: 760px; margin: 0 auto; padding: 0 28px; }
+
+  /* ─────────────────────────────────────────────
+     ANNOUNCEMENT BAR
+     ───────────────────────────────────────────── */
+  .announce {
+    background: var(--sage-deep);
+    color: var(--paper);
+    text-align: center;
+    padding: 11px 16px;
+    font-size: var(--t-xs);
+    letter-spacing: 0.04em;
+    font-weight: 500;
+    overflow: hidden;
+  }
+  .announce-text {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .announce-item {
+    white-space: nowrap;
+    max-width: 100%;
+  }
+  .announce-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-variation-settings: "opsz" 144;
+  }
+  .announce-brand::before,
+  .announce-brand::after {
+    content: '';
+    width: 34px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--terracotta-soft), transparent);
+  }
+  @media (max-width: 420px) {
+    .announce-brand {
+      gap: 8px;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+    }
+    .announce-brand::before,
+    .announce-brand::after {
+      width: 20px;
+    }
+  }
+  .announce-dot {
+    color: var(--terracotta-soft);
+    font-weight: 700;
+  }
+  .announce .dot {
+    display: inline-block;
+    width: 6px; height: 6px;
+    background: var(--terracotta-soft);
+    border-radius: 50%;
+    vertical-align: middle;
+    margin: 0 10px;
+    animation: pulse 2.4s var(--ease-out-quart) infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 0.4; transform: scale(1); }
+    50%      { opacity: 1;   transform: scale(1.15); }
+  }
+
+  /* ─────────────────────────────────────────────
+     HERO
+     Mobile-first single column. Centered hierarchy:
+     pill → h1 → sub → trust → video → CTA.
+     Above the fold on phones means CTA visible
+     without extreme scroll.
+     ───────────────────────────────────────────── */
+  .hero {
+    padding: 32px 0 40px;
+    position: relative;
+    text-align: center;
+  }
+  .hero .wrap {
+    max-width: 720px;
+  }
+
+  .hero-h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    line-height: 1.1;
+    font-size: clamp(34px, 5.5vw, 56px);
+    letter-spacing: -0.018em;
+    margin: 0 auto 22px;
+    max-width: 18ch;
+    text-wrap: balance;
+    font-variation-settings: "opsz" 36, "SOFT" 30;
+  }
+  .desktop-br { display: inline; }
+  @media (max-width: 580px) {
+    .desktop-br { display: none; }
+    .hero-h1 { max-width: 14ch; }
+  }
+  .hero-h1 .accent {
+    font-style: italic;
+    font-weight: 500;
+    color: var(--terracotta-deep);
+    font-variation-settings: "opsz" 24, "SOFT" 30;
+    letter-spacing: -0.005em;
+  }
+
+  .hero-sub {
+    font-size: var(--t-base);
+    line-height: 1.55;
+    color: var(--ink-soft);
+    margin: 0 auto 28px;
+    max-width: 48ch;
+    text-align: center;
+  }
+  .hero-sub-highlight {
+    color: var(--ink);
+    font-weight: 600;
+    position: relative;
+    display: block;
+    text-align: center;
+    white-space: normal;
+  }
+  .hero-sub-highlight::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -2px;
+    height: 8px;
+    background:
+      linear-gradient(180deg, transparent 50%, oklch(85% 0.060 35 / 0.55) 50%);
+    z-index: -1;
+    transform: skewX(-8deg);
+  }
+
+  /* Trust row — avatars + stars + caption */
+  .hero-trust {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin: 0 auto 30px;
+    padding: 10px 16px 10px 12px;
+    background: var(--paper-warm);
+    border: 1px solid var(--linen);
+    border-radius: 50px;
+    max-width: 100%;
+  }
+  .hero-avatars {
+    display: flex;
+    align-items: center;
+  }
+  .hero-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid var(--paper-warm);
+    background: var(--sage-wash);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .hero-avatar + .hero-avatar {
+    margin-left: -10px;
+  }
+  /* Tinted gradient placeholders fallback */
+  .hero-avatar-1 { background: linear-gradient(135deg, oklch(82% 0.045 30), oklch(72% 0.060 25)); }
+  .hero-avatar-2 { background: linear-gradient(135deg, oklch(82% 0.040 80), oklch(72% 0.055 70)); }
+  .hero-avatar-3 { background: linear-gradient(135deg, oklch(82% 0.040 145), oklch(72% 0.045 140)); }
+  .hero-trust-body {
+    text-align: center;
+    line-height: 1.2;
+  }
+  .hero-trust-stars {
+    color: var(--gold);
+    letter-spacing: 1.5px;
+    font-size: 13px;
+    margin-bottom: 2px;
+  }
+  .hero-trust-caption {
+    font-size: var(--t-xs);
+    color: var(--ink-soft);
+    max-width: 46ch;
+  }
+  .hero-trust-caption strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  /* Video / media wrap */
+  .hero-media-wrap {
+    position: relative;
+    max-width: 480px;
+    margin: 0 auto 32px;
+    padding: 14px 14px 18px;
+    background: var(--paper);
+    border-radius: 28px;
+    box-shadow:
+      0 1px 0 oklch(95% 0.020 80),
+      0 30px 60px -30px oklch(38% 0.045 145 / 0.28);
+  }
+  .hero-media-wrap::before {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    background: linear-gradient(135deg, var(--sage-wash), var(--blush-soft));
+    border-radius: 32px;
+    z-index: -1;
+    opacity: 0.7;
+  }
+  .hero-media {
+    aspect-ratio: 4 / 5;
+    border-radius: 18px;
+    overflow: hidden;
+    background: var(--paper-warm);
+    box-shadow: 0 4px 12px -4px oklch(38% 0.045 145 / 0.18);
+    position: relative;
+  }
+  .hero-media video,
+  .hero-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  /* "Instant access!" pill — floats top-left over the frame */
+  .hero-pill-instant {
+    position: absolute;
+    top: -14px;
+    left: -8px;
+    z-index: 4;
+    background: var(--terracotta);
+    color: var(--paper);
+    padding: 9px 16px;
+    border-radius: 50px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    box-shadow: 0 8px 20px -6px oklch(58% 0.130 35 / 0.45);
+    transform: rotate(-4deg);
+    max-width: calc(100% - 24px);
+    white-space: normal;
+    text-align: center;
+    line-height: 1.2;
+  }
+
+  /* Floating badge — pattern count (circular sage style) */
+  .hero-badge {
+    position: absolute;
+    z-index: 3;
+  }
+  .hero-badge-patterns {
+    bottom: -16px;
+    right: -16px;
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    background: var(--sage-wash);
+    border: 2px solid var(--sage-soft);
+    box-shadow: 0 14px 26px -10px oklch(38% 0.045 145 / 0.32);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    transform: rotate(8deg);
+    padding: 0;
+  }
+  .hero-badge-num {
+    font-family: 'Fraunces', serif;
+    font-size: 28px;
+    font-weight: 500;
+    color: var(--sage-deep);
+    line-height: 1;
+    font-variation-settings: "opsz" 144;
+  }
+  .hero-badge-label {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--sage-deep);
+    line-height: 1.2;
+    font-weight: 700;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    background: var(--terracotta);
+    color: var(--paper);
+    padding: 18px 34px;
+    font-size: var(--t-base);
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    letter-spacing: 0.01em;
+    transition: transform 0.4s var(--ease-out-quart),
+                background-color 0.3s var(--ease-out-quart),
+                box-shadow 0.4s var(--ease-out-quart);
+    box-shadow: 0 4px 16px oklch(58% 0.130 35 / 0.25);
+    max-width: 100%;
+    white-space: normal;
+    text-align: center;
+  }
+  .btn:hover {
+    background: var(--terracotta-deep);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px oklch(58% 0.130 35 / 0.32);
+  }
+  .btn .arrow {
+    transition: transform 0.4s var(--ease-out-quart);
+  }
+  .btn:hover .arrow {
+    transform: translateX(4px);
+  }
+
+  /* ─────────────────────────────────────────────
+     SECTION: WHAT IT IS
+     ───────────────────────────────────────────── */
+  .section {
+    padding: 72px 0;
+  }
+  .section-sage {
+    background: var(--sage-wash);
+  }
+  .section-warm {
+    background: var(--paper-warm);
+  }
+
+  .eyebrow {
+    display: inline-block;
+    font-size: var(--t-xs);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--sage);
+    font-weight: 600;
+    margin-bottom: 20px;
+    max-width: 100%;
+    white-space: normal;
+    text-align: center;
+    line-height: 1.35;
+  }
+  .eyebrow.center { display: block; text-align: center; }
+
+  .section h2 {
+    font-size: clamp(30px, 4vw, 50px);
+  }
+  .section-intro {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 44px;
+  }
+  .section-intro h2 { margin-bottom: 16px; }
+  .section-intro p {
+    font-size: var(--t-base);
+    color: var(--ink-soft);
+    margin: 0 auto;
+    max-width: 56ch;
+  }
+
+  /* ─────────────────────────────────────────────
+     HOW IT WORKS — PrintaBuilds-style
+     Big numbers, simple icons, clear progression
+     ───────────────────────────────────────────── */
+  .how-section {
+    background: var(--paper);
+  }
+  .how-intro {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 64px;
+  }
+  .how-eyebrow {
+    display: inline-block;
+    font-size: var(--t-xs);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--terracotta-deep);
+    font-weight: 700;
+    background: var(--blush-soft);
+    padding: 8px 16px;
+    border-radius: 50px;
+    margin-bottom: 22px;
+    max-width: 100%;
+    white-space: normal;
+    text-align: center;
+    line-height: 1.35;
+  }
+  .how-intro h2 {
+    font-size: clamp(32px, 4.2vw, 50px);
+  }
+  .how-intro h2 em {
+    font-style: italic;
+    color: var(--terracotta-deep);
+    font-variation-settings: "opsz" 144;
+  }
+
+  .how-steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    margin-bottom: 40px;
+    position: relative;
+  }
+  .how-steps::before {
+    content: '';
+    position: absolute;
+    top: 56px;
+    left: 16%;
+    right: 16%;
+    height: 2px;
+    background-image: radial-gradient(circle, var(--sage) 1.5px, transparent 1.5px);
+    background-size: 12px 2px;
+    background-repeat: repeat-x;
+    z-index: 0;
+    opacity: 0.5;
+  }
+
+  .how-step {
+    background: var(--paper-warm);
+    border: 1px solid var(--linen);
+    border-radius: var(--r-lg);
+    padding: 40px 28px 32px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    transition: transform 0.5s var(--ease-out-quart),
+                box-shadow 0.5s var(--ease-out-quart);
+  }
+  .how-step:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px -20px oklch(38% 0.045 145 / 0.2);
+  }
+  .how-step-num {
+    position: absolute;
+    top: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 44px;
+    height: 44px;
+    background: var(--terracotta);
+    color: var(--paper);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 1;
+    box-shadow: 0 6px 14px oklch(58% 0.130 35 / 0.32);
+    border: 3px solid var(--paper);
+  }
+  .how-step-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    background: var(--paper);
+    border: 1px solid var(--linen);
+    border-radius: 50%;
+    color: var(--sage-deep);
+    margin: 8px auto 22px;
+  }
+  .how-step h3 {
+    font-family: 'Fraunces', serif;
+    font-size: var(--t-xl);
+    font-weight: 500;
+    margin-bottom: 12px;
+    color: var(--ink);
+  }
+  .how-step p {
+    font-size: var(--t-sm);
+    color: var(--ink-soft);
+    line-height: 1.55;
+    margin: 0 auto;
+    max-width: 32ch;
+  }
+  .how-cta {
+    text-align: center;
+  }
+
+  /* ─────────────────────────────────────────────
+     PAPERPROFIT-MODELED OFFER (po-*)
+     Cream background, yellow SPECIAL OFFER pill,
+     dashed-border timer card, LAUNCH OFFER tag,
+     terracotta product name, big black price,
+     green checklist, dashed bonuses box,
+     full-width green CTA.
+     Adapted to cottagecore palette.
+     ───────────────────────────────────────────── */
+  .po-offer {
+    background:
+      radial-gradient(ellipse at 20% 0%, var(--blush-soft) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 100%, var(--sage-wash) 0%, transparent 55%),
+      var(--paper-warm);
+    padding: 60px 20px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .po-offer > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Top section */
+  .po-top {
+    max-width: 480px;
+    margin: 0 auto 32px;
+    text-align: center;
+  }
+  .po-pill-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 18px;
+    width: 100%;
+  }
+  .po-pill {
+    display: inline-block;
+    padding: 10px 24px;
+    border-radius: 12px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    font-size: 18px;
+    max-width: 100%;
+    white-space: normal;
+    text-align: center;
+    line-height: 1.25;
+  }
+  .po-pill-yellow {
+    background: oklch(78% 0.150 75);
+    color: var(--ink);
+    box-shadow: 0 3px 0 oklch(60% 0.130 70);
+  }
+  .po-pill-script {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 28px;
+    color: var(--terracotta-deep);
+    margin-top: 8px;
+    font-variation-settings: "opsz" 144;
+  }
+  .po-subtitle {
+    font-size: var(--t-base);
+    color: var(--ink-soft);
+    margin-bottom: 26px;
+  }
+
+  /* Timer card — dashed border, cream bg */
+  .po-timer-card {
+    border: 2px dashed var(--terracotta);
+    border-radius: var(--r-lg);
+    padding: 18px 22px;
+    background: var(--paper);
+    display: inline-block;
+  }
+  .po-timer-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: var(--t-xs);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--terracotta-deep);
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .po-timer-clock {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    gap: 6px;
+  }
+  .po-timer-unit {
+    background: var(--paper);
+    border: 1px solid var(--linen);
+    border-radius: var(--r);
+    padding: 10px 14px 8px;
+    min-width: 66px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 2px 0 var(--linen);
+  }
+  .po-timer-num {
+    font-family: 'Fraunces', serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+  }
+  .po-timer-lbl {
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-top: 6px;
+    font-weight: 700;
+  }
+  .po-timer-sep {
+    align-self: center;
+    font-family: 'Fraunces', serif;
+    font-size: 24px;
+    color: var(--terracotta);
+    font-weight: 600;
+    margin-top: -10px;
+  }
+
+  /* The card */
+  .po-card {
+    max-width: 460px;
+    margin: 0 auto;
+    background: var(--paper);
+    border: 3px solid var(--terracotta);
+    border-radius: 24px;
+    padding: 40px 28px 28px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 20px 60px -20px oklch(58% 0.130 35 / 0.3);
+  }
+
+  /* Launch tag floating */
+  .po-launch-tag {
+    position: absolute;
+    top: -16px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: oklch(78% 0.150 75);
+    color: var(--ink);
+    padding: 8px 22px;
+    border-radius: 50px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    font-size: var(--t-xs);
+    letter-spacing: 0.12em;
+    box-shadow: 0 3px 0 oklch(60% 0.130 70);
+    max-width: calc(100% - 32px);
+    white-space: normal;
+    text-align: center;
+    line-height: 1.2;
+  }
+
+  /* Product name */
+  .po-product-name {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(28px, 6vw, 36px);
+    font-weight: 700;
+    color: var(--terracotta-deep);
+    line-height: 1;
+    letter-spacing: 0.02em;
+    margin: 12px 0 6px;
+    text-transform: uppercase;
+  }
+  .po-product-bundle {
+    font-size: var(--t-xs);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    font-weight: 600;
+    margin-bottom: 22px;
+  }
+
+  /* Price row */
+  .po-price-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 4px;
+  }
+  .po-price-was {
+    font-family: 'Fraunces', serif;
+    font-size: var(--t-xl);
+    color: var(--ink-mute);
+    text-decoration: line-through;
+    text-decoration-thickness: 1.5px;
+  }
+  .po-price-save {
+    background: oklch(85% 0.090 145);
+    color: oklch(35% 0.085 145);
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+  }
+  .po-price-now {
+    font-family: 'Fraunces', serif;
+    font-size: 84px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    margin: 4px 0 4px;
+  }
+  .po-price-meta {
+    font-size: var(--t-xs);
+    color: var(--ink-mute);
+    margin-bottom: 24px;
+  }
+
+  /* Checklist */
+  .po-checklist {
+    list-style: none;
+    margin: 0 0 20px;
+    padding: 18px 16px;
+    background: var(--paper-warm);
+    border-radius: var(--r-lg);
+    text-align: left;
+  }
+  .po-checklist li {
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    align-items: start;
+    gap: 8px;
+    padding: 8px 0;
+    font-size: var(--t-sm);
+    color: var(--ink);
+    line-height: 1.5;
+  }
+  .po-check {
+    color: oklch(58% 0.130 150);
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 1.4;
+  }
+  .po-emoji {
+    font-size: 16px;
+    line-height: 1.4;
+  }
+  .po-li-text {
+    line-height: 1.45;
+  }
+  .po-li-text em {
+    font-style: italic;
+    font-family: 'Fraunces', serif;
+    color: var(--ink-soft);
+    font-variation-settings: "opsz" 144;
+    font-weight: 400;
+  }
+  .po-checklist li strong {
+    color: var(--ink);
+    font-weight: 700;
+  }
+  /* Highlighted item — LIFETIME access */
+  .po-li-highlight {
+    margin-top: 6px;
+    padding: 10px 12px !important;
+    background: oklch(85% 0.090 145);
+    border-radius: var(--r);
+    border: 1px solid oklch(72% 0.110 150);
+  }
+  .po-li-highlight strong {
+    color: oklch(28% 0.085 145);
+  }
+  .po-li-highlight .po-check {
+    color: oklch(40% 0.110 150);
+  }
+
+  /* Bonuses callout */
+  .po-bonuses {
+    border: 2px dashed oklch(78% 0.150 75);
+    background: oklch(98% 0.040 75 / 0.7);
+    border-radius: var(--r-lg);
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 22px;
+    text-align: left;
+  }
+  .po-bonuses-icon {
+    width: 50px;
+    height: 50px;
+    background: var(--paper);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--terracotta-deep);
+    flex-shrink: 0;
+    border: 1px solid oklch(82% 0.080 65);
+  }
+  .po-bonuses-title {
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    font-size: var(--t-xs);
+    letter-spacing: 0.06em;
+    color: var(--ink);
+    line-height: 1.2;
+    margin-bottom: 6px;
+  }
+  .po-bonuses-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: var(--t-xs);
+  }
+  .po-bonuses-meta s {
+    color: var(--ink-mute);
+    text-decoration-thickness: 1px;
+  }
+  .po-bonuses-today {
+    background: oklch(60% 0.130 150);
+    color: var(--paper);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    font-size: 10px;
+  }
+
+  /* CTA button — full-width green */
+  .po-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    background: oklch(58% 0.130 150);
+    color: var(--paper);
+    padding: 18px 20px;
+    border-radius: var(--r-lg);
+    text-decoration: none;
+    box-shadow: 0 4px 0 oklch(45% 0.110 150),
+                0 12px 24px -6px oklch(58% 0.130 150 / 0.4);
+    transition: transform 0.3s var(--ease-out-quart),
+                box-shadow 0.3s var(--ease-out-quart),
+                background-color 0.3s;
+    cursor: pointer;
+  }
+  .po-btn:hover {
+    background: oklch(52% 0.140 150);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 oklch(45% 0.110 150),
+                0 14px 28px -6px oklch(58% 0.130 150 / 0.5);
+  }
+  .po-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 oklch(45% 0.110 150),
+                0 8px 16px -4px oklch(58% 0.130 150 / 0.4);
+  }
+  .po-btn-main {
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: 0.02em;
+  }
+  .po-btn-sub {
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    opacity: 0.85;
+    font-weight: 500;
+  }
+
+  /* ─────────────────────────────────────────────
+     CHAT TESTIMONIALS — WhatsApp-style cards
+     Three side-by-side chats with photo bubbles.
+     Stack on mobile.
+     ───────────────────────────────────────────── */
+  .chat-section {
+    background: var(--paper-warm);
+  }
+  .chat-intro {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 56px;
+  }
+  .chat-intro h2 em {
+    font-style: italic;
+    color: var(--terracotta-deep);
+    font-variation-settings: "opsz" 144;
+  }
+  .chat-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 1180px;
+    margin: 0 auto;
+  }
+
+  .chat-card {
+    background: var(--paper);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    box-shadow: 0 20px 40px -20px oklch(38% 0.045 145 / 0.2);
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--linen);
+  }
+
+  .chat-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    background: oklch(35% 0.085 150);
+    color: var(--paper);
+  }
+  .chat-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--paper);
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+  .chat-avatar-1 { background: linear-gradient(135deg, oklch(70% 0.090 30), oklch(58% 0.130 35)); }
+  .chat-avatar-2 { background: linear-gradient(135deg, oklch(70% 0.080 80), oklch(58% 0.110 70)); }
+  .chat-avatar-3 { background: linear-gradient(135deg, oklch(70% 0.070 145), oklch(52% 0.055 145)); }
+  .chat-meta {
+    flex: 1;
+    min-width: 0;
+  }
+  .chat-name {
+    font-weight: 600;
+    font-size: var(--t-sm);
+    color: var(--paper);
+    margin-bottom: 2px;
+  }
+  .chat-status {
+    font-size: 11px;
+    color: oklch(85% 0.040 150);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .chat-online-dot {
+    width: 7px;
+    height: 7px;
+    background: oklch(75% 0.180 145);
+    border-radius: 50%;
+  }
+  .chat-header-icons {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    color: oklch(78% 0.030 150);
+    opacity: 0.85;
+  }
+  .chat-header-icons svg {
+    flex-shrink: 0;
+  }
+  /* Date separator pill INSIDE the chat body, WhatsApp-style */
+  .chat-date-sep {
+    text-align: center;
+    margin: 4px 0 10px;
+  }
+  .chat-date-sep span {
+    display: inline-block;
+    background: oklch(88% 0.025 75 / 0.9);
+    color: oklch(40% 0.020 145);
+    padding: 4px 12px;
+    border-radius: 50px;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    font-weight: 700;
+    box-shadow: 0 1px 2px oklch(20% 0.012 145 / 0.08);
+  }
+
+  .chat-body {
+    flex: 1;
+    background:
+      radial-gradient(ellipse 200px 80px at 30% 20%, oklch(94% 0.020 145 / 0.6), transparent),
+      radial-gradient(ellipse 200px 100px at 70% 70%, oklch(92% 0.030 75 / 0.4), transparent),
+      oklch(96% 0.015 75);
+    padding: 18px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-height: 300px;
+  }
+  .chat-bubble {
+    max-width: 85%;
+    padding: 9px 12px;
+    border-radius: 12px;
+    font-size: var(--t-sm);
+    line-height: 1.4;
+    position: relative;
+    word-wrap: break-word;
+  }
+  .chat-bubble p {
+    margin: 0;
+    color: var(--ink);
+    font-size: var(--t-sm);
+    line-height: 1.4;
+  }
+  .chat-bubble-in {
+    background: var(--paper);
+    align-self: flex-start;
+    border-top-left-radius: 4px;
+    box-shadow: 0 1px 2px oklch(20% 0.012 145 / 0.1);
+  }
+  .chat-bubble-out {
+    background: oklch(86% 0.075 145);
+    align-self: flex-end;
+    border-top-right-radius: 4px;
+    box-shadow: 0 1px 2px oklch(20% 0.012 145 / 0.1);
+  }
+  .chat-time {
+    display: block;
+    font-size: 10px;
+    color: var(--ink-mute);
+    margin-top: 3px;
+    text-align: right;
+  }
+  .chat-checks {
+    color: oklch(55% 0.140 235);
+    font-weight: 700;
+    margin-left: 4px;
+  }
+  .chat-bubble-img {
+    padding: 5px;
+    max-width: 70%;
+  }
+  .chat-photo {
+    aspect-ratio: 4/5;
+    background:
+      repeating-linear-gradient(45deg,
+        oklch(92% 0.020 75) 0 16px,
+        oklch(88% 0.025 70) 16px 17px);
+    border-radius: 8px;
+    margin-bottom: 4px;
+    position: relative;
+    overflow: hidden;
+  }
+  .chat-photo:not(:has(img))::after {
+    content: '📷 photo slot';
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ink-mute);
+    font-size: 11px;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+  }
+  .chat-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
+  }
+
+  .chat-footer {
+    padding: 12px 16px;
+    background: var(--paper);
+    border-top: 1px solid var(--linen);
+    text-align: center;
+  }
+  .chat-location {
+    font-size: var(--t-xs);
+    color: var(--ink-soft);
+    letter-spacing: 0.02em;
+  }
+
+  /* ─────────────────────────────────────────────
+     GUARANTEE
+     ───────────────────────────────────────────── */
+  .guarantee {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .guarantee-seal {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 110px;
+    height: 110px;
+    background: var(--paper);
+    border: 2px solid var(--sage);
+    border-radius: 50%;
+    margin-bottom: 32px;
+    color: var(--sage-deep);
+  }
+  .guarantee h2 { margin-bottom: 20px; }
+  .guarantee p {
+    font-size: var(--t-lg);
+    color: var(--ink-soft);
+    margin: 0 auto 16px;
+    line-height: 1.65;
+  }
+
+  /* ─────────────────────────────────────────────
+     FAQ — accordion, no cards
+     ───────────────────────────────────────────── */
+  .faq {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .faq-item {
+    border-bottom: 1px solid var(--linen);
+  }
+  .faq-q {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 28px 0;
+    text-align: left;
+    font-family: 'Fraunces', serif;
+    font-size: var(--t-lg);
+    font-weight: 500;
+    color: var(--ink);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    transition: color 0.3s var(--ease-out-quart);
+  }
+  .faq-q:hover { color: var(--sage-deep); }
+  .faq-q .plus {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1px solid var(--sage-soft);
+    color: var(--sage);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: transform 0.4s var(--ease-out-quart),
+                background 0.3s,
+                color 0.3s;
+    font-size: 16px;
+    line-height: 1;
+  }
+  .faq-item.open .faq-q .plus {
+    transform: rotate(45deg);
+    background: var(--sage);
+    color: var(--paper);
+    border-color: var(--sage);
+  }
+  .faq-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s var(--ease-out-expo);
+  }
+  .faq-a-inner {
+    padding: 0 0 28px;
+    color: var(--ink-soft);
+    line-height: 1.65;
+    max-width: 64ch;
+  }
+  .faq-item.open .faq-a {
+    max-height: 400px;
+  }
+
+  /* ─────────────────────────────────────────────
+     FINAL CTA
+     ───────────────────────────────────────────── */
+  .final {
+    text-align: center;
+    padding: 120px 0;
+  }
+  .final h2 {
+    font-size: clamp(34px, 4.5vw, 60px);
+    max-width: 16ch;
+    margin: 0 auto 24px;
+  }
+  .final h2 em {
+    color: var(--terracotta-deep);
+    font-style: italic;
+    font-variation-settings: "opsz" 144;
+  }
+  .final p {
+    font-size: var(--t-lg);
+    color: var(--ink-soft);
+    max-width: 520px;
+    margin: 0 auto 40px;
+  }
+
+  /* ─────────────────────────────────────────────
+     FOOTER
+     ───────────────────────────────────────────── */
+  /* ─────────────────────────────────────────────
+     FOOTER — simple
+     ───────────────────────────────────────────── */
+  footer {
+    background: var(--sage-deep);
+    color: oklch(82% 0.020 145);
+    padding: 48px 0 28px;
+    text-align: center;
+    font-size: var(--t-sm);
+  }
+  .footer-brand {
+    font-family: 'Fraunces', serif;
+    font-size: var(--t-xl);
+    font-weight: 500;
+    color: var(--paper);
+    margin-bottom: 6px;
+    letter-spacing: 0.01em;
+  }
+  .footer-tag {
+    font-size: var(--t-sm);
+    color: oklch(75% 0.025 145);
+    margin: 0 auto 24px;
+    font-style: italic;
+    font-family: 'Fraunces', serif;
+  }
+  footer .copy {
+    color: oklch(65% 0.020 145);
+    font-size: var(--t-xs);
+  }
+
+  /* ─────────────────────────────────────────────
+     BONUS STACK
+     Premium magazine rows. Image + body side by side
+     on desktop, stacked card on mobile.
+     ───────────────────────────────────────────── */
+  .bonus-section {
+    background: var(--paper);
+    padding: 72px 0;
+    position: relative;
+  }
+  .bonus-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 1px;
+    background: var(--sage-soft);
+  }
+  .bonus-intro {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 56px;
+  }
+  .bonus-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 50px;
+    background: var(--blush-soft);
+    color: var(--terracotta-deep);
+    font-size: var(--t-xs);
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 22px;
+    max-width: 100%;
+    white-space: normal;
+    text-align: center;
+    line-height: 1.35;
+  }
+  .bonus-pill::before {
+    content: '';
+  }
+  .bonus-intro h2 {
+    font-size: clamp(30px, 4vw, 46px);
+    margin-bottom: 14px;
+  }
+  .bonus-intro h2 em {
+    font-style: italic;
+    color: var(--terracotta-deep);
+    font-variation-settings: "opsz" 144;
+  }
+  .bonus-intro p {
+    font-size: var(--t-base);
+    color: var(--ink-soft);
+    margin: 0 auto;
+    max-width: 50ch;
+  }
+
+  /* List of rows */
+  .bonus-list {
+    display: flex;
+    flex-direction: column;
+    gap: 96px;
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+  .bonus-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: center;
+    position: relative;
+  }
+  .bonus-row:nth-child(even) .bonus-image {
+    order: 2;
+  }
+  .bonus-image {
+    aspect-ratio: 1 / 1;
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    background: var(--paper-warm);
+    border: 1px solid var(--linen);
+    position: relative;
+  }
+  .bonus-num-tag {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    z-index: 3;
+    background: var(--terracotta);
+    color: var(--paper);
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-family: 'Inter', sans-serif;
+    font-size: var(--t-xs);
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    box-shadow: 0 6px 16px oklch(58% 0.130 35 / 0.32);
+    transform: rotate(-3deg);
+  }
+  .bonus-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 1.2s var(--ease-out-expo);
+  }
+  .bonus-row:hover .bonus-image img {
+    transform: scale(1.03);
+  }
+
+  /* Text body */
+  .bonus-body .step-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: var(--t-xs);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--sage);
+    font-weight: 600;
+    margin-bottom: 14px;
+  }
+  .bonus-body .step-label::before {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: var(--sage-soft);
+  }
+  .bonus-body h3 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(26px, 2.8vw, 36px);
+    font-weight: 500;
+    line-height: 1.15;
+    margin-bottom: 14px;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+  .bonus-body h3 em {
+    font-style: italic;
+    color: var(--sage-deep);
+    font-variation-settings: "opsz" 144;
+  }
+  .bonus-body .lede {
+    font-size: var(--t-base);
+    color: var(--ink-soft);
+    line-height: 1.6;
+    margin-bottom: 22px;
+    max-width: 46ch;
+  }
+  .bonus-meta {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding-top: 20px;
+    border-top: 1px solid var(--linen);
+    flex-wrap: wrap;
+  }
+  .bonus-free {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: oklch(85% 0.090 145);
+    color: oklch(28% 0.085 145);
+    padding: 6px 14px;
+    border-radius: 50px;
+    font-size: var(--t-xs);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .bonus-free svg { flex-shrink: 0; }
+  .bonus-value {
+    font-size: var(--t-sm);
+    color: var(--ink-soft);
+  }
+  .bonus-value s {
+    margin-right: 4px;
+    text-decoration-thickness: 1.5px;
+  }
+  .bonus-value strong {
+    color: var(--ink);
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+  }
+
+  /* ─────────────────────────────────────────────
+     CATALOG CAROUSEL
+     Full-bleed scroll-snap horizontal carousel.
+     Cards have varied tag colors via :nth-child
+     so they don't feel like an identical grid.
+     ───────────────────────────────────────────── */
+  .catalog-section {
+    padding: 72px 0 60px;
+    background: var(--paper);
+    overflow: hidden;
+  }
+  .catalog-intro {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 48px;
+  }
+  .catalog-intro h2 {
+    font-size: clamp(34px, 4.4vw, 54px);
+  }
+  .catalog-intro h2 em {
+    font-style: italic;
+    color: var(--terracotta-deep);
+    font-variation-settings: "opsz" 144;
+  }
+  .catalog-intro p {
+    font-size: var(--t-lg);
+    color: var(--ink-soft);
+    margin: 22px auto 0;
+    max-width: 60ch;
+  }
+
+  .catalog-carousel {
+    position: relative;
+    margin-bottom: 36px;
+  }
+  .catalog-track {
+    display: flex;
+    gap: 24px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    padding: 12px 28px 32px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    scroll-padding: 28px;
+    max-width: 100%;
+    touch-action: pan-x pan-y;
+  }
+  .catalog-track::-webkit-scrollbar { display: none; }
+
+  /* Center first/last so they don't stick to viewport edges */
+  .catalog-track::before,
+  .catalog-track::after {
+    content: '';
+    flex: 0 0 max(0px, calc((100% - 1180px) / 2));
+  }
+
+  .catalog-card {
+    flex: 0 0 260px;
+    background: var(--paper);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    scroll-snap-align: start;
+    transition: transform 0.6s var(--ease-out-expo),
+                box-shadow 0.6s var(--ease-out-expo);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  .catalog-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 24px 50px -24px oklch(38% 0.045 145 / 0.28);
+  }
+  .catalog-media {
+    aspect-ratio: 1 / 1;
+    background: var(--paper-warm);
+    overflow: hidden;
+    position: relative;
+    border-radius: var(--r-lg);
+    border: 1px solid var(--linen);
+  }
+  .catalog-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 1.4s var(--ease-out-expo);
+  }
+  .catalog-card:hover .catalog-media img {
+    transform: scale(1.05);
+  }
+  .catalog-body {
+    padding: 18px 8px 6px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .catalog-body h3 {
+    font-family: 'Fraunces', serif;
+    font-size: var(--t-xl);
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--ink);
+    margin: 0;
+  }
+
+  /* Carousel controls */
+  .catalog-controls {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+  }
+  .catalog-arrow {
+    width: 48px;
+    height: 48px;
+    background: var(--paper);
+    border: 1px solid var(--linen);
+    color: var(--sage-deep);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s var(--ease-out-quart),
+                color 0.3s,
+                border-color 0.3s,
+                transform 0.3s;
+  }
+  .catalog-arrow:hover {
+    background: var(--sage-deep);
+    color: var(--paper);
+    border-color: var(--sage-deep);
+    transform: translateY(-2px);
+  }
+  .catalog-arrow[disabled] {
+    opacity: 0.35;
+    cursor: not-allowed;
+    transform: none !important;
+    background: var(--paper);
+    color: var(--ink-mute);
+    border-color: var(--linen);
+  }
+
+  /* ─────────────────────────────────────────────
+     WHO IT'S FOR — TABS
+     Tabbed reveal, not 3-card grid.
+     Visual placeholder slot per tab.
+     ───────────────────────────────────────────── */
+  .who-section { background: var(--paper); }
+  .who-panels {
+    position: relative;
+    max-width: 980px;
+    margin: 0 auto;
+  }
+  .who-panel {
+    display: none;
+    animation: fadeIn 0.6s var(--ease-out-quart);
+  }
+  .who-panel.is-active { display: block; }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .who-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+    justify-items: center;
+  }
+  .who-text {
+    width: 100%;
+    max-width: 520px;
+  }
+  .who-text h3 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(28px, 3.4vw, 40px);
+    font-weight: 500;
+    line-height: 1.2;
+    margin-bottom: 18px;
+    color: var(--ink);
+  }
+  .who-text > p {
+    font-size: var(--t-lg);
+    color: var(--ink-soft);
+    line-height: 1.6;
+    margin-bottom: 24px;
+    max-width: 44ch;
+  }
+  .who-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .who-list li {
+    padding: 11px 0 11px 28px;
+    color: var(--ink);
+    font-size: var(--t-sm);
+    border-bottom: 1px solid var(--linen);
+    position: relative;
+  }
+  .who-list li:last-child { border-bottom: none; }
+  .who-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 18px;
+    width: 14px;
+    height: 1px;
+    background: var(--terracotta);
+  }
+
+  /* Image slot for the tab */
+  .who-image-slot {
+    aspect-ratio: 4 / 5;
+    background: var(--paper-warm);
+    border: 1px solid var(--linen);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    position: relative;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+  .who-image-slot img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  /* ─────────────────────────────────────────────
+     PROBLEM / AGITATION SECTION
+     Quiet pain, not screaming. Editorial typography.
+     ───────────────────────────────────────────── */
+  .problem-section {
+    background: var(--paper);
+  }
+  .problem-intro {
+    text-align: center;
+    max-width: 680px;
+    margin: 0 auto 48px;
+  }
+  .problem-intro h2 {
+    font-size: clamp(32px, 4.2vw, 50px);
+  }
+  .problem-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+  .pain {
+    text-align: center;
+    padding: 8px 4px;
+  }
+  .pain-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--paper-warm);
+    border: 1px solid var(--linen);
+    color: var(--sage-deep);
+    margin-bottom: 20px;
+  }
+  .pain h3 {
+    font-family: 'Fraunces', serif;
+    font-size: var(--t-lg);
+    font-weight: 500;
+    margin-bottom: 10px;
+    line-height: 1.25;
+  }
+  .pain p {
+    font-size: var(--t-sm);
+    color: var(--ink-soft);
+    margin: 0 auto;
+    max-width: 24ch;
+    line-height: 1.5;
+  }
+  .problem-bridge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    margin-top: 56px;
+    flex-wrap: wrap;
+    max-width: 100%;
+  }
+  .problem-bridge p {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: var(--t-lg);
+    color: var(--sage-deep);
+    margin: 0;
+    max-width: min(100%, 42ch);
+    text-align: center;
+    font-variation-settings: "opsz" 144;
+  }
+  .bridge-line {
+    flex: 0 1 56px;
+    height: 1px;
+    background: var(--sage-soft);
+  }
+
+  /* ─────────────────────────────────────────────
+     WHY IT WORKS
+     Four cards on sage wash — but each gets a
+     varied internal rhythm via the numbered marks
+     ───────────────────────────────────────────── */
+  .why-section {
+    /* uses section-sage background */
+  }
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    max-width: 980px;
+    margin: 0 auto;
+  }
+  .why-card {
+    background: var(--paper);
+    border: 1px solid var(--linen);
+    border-radius: var(--r-lg);
+    padding: 36px 32px;
+    position: relative;
+    transition: transform 0.5s var(--ease-out-quart),
+                box-shadow 0.5s var(--ease-out-quart);
+  }
+  .why-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px -20px oklch(38% 0.045 145 / 0.2);
+  }
+  .why-num {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 44px;
+    line-height: 1;
+    color: var(--terracotta);
+    margin-bottom: 18px;
+    font-variation-settings: "opsz" 144;
+  }
+  .why-card h3 {
+    font-family: 'Fraunces', serif;
+    font-size: var(--t-xl);
+    font-weight: 500;
+    margin-bottom: 12px;
+    line-height: 1.25;
+  }
+  .why-card p {
+    color: var(--ink-soft);
+    font-size: var(--t-sm);
+    line-height: 1.6;
+    margin: 0;
+    max-width: 46ch;
+  }
+
+  /* ─────────────────────────────────────────────
+     RESPONSIVE
+     ───────────────────────────────────────────── */
+  @media (max-width: 920px) {
+    .hero { padding: 24px 0 32px; }
+    .po-offer { padding: 56px 16px 72px; }
+    .po-card { padding: 32px 22px 22px; }
+    .po-price-now { font-size: 68px; }
+    .po-timer-unit { min-width: 58px; padding: 8px 10px 6px; }
+    .po-timer-num { font-size: 22px; }
+    .po-bonuses { flex-direction: column; text-align: center; gap: 10px; padding: 16px; }
+    .po-bonuses-meta { justify-content: center; }
+    .how-steps {
+      grid-template-columns: 1fr;
+      gap: 48px;
+      max-width: 420px;
+      margin-left: auto;
+      margin-right: auto;
+      position: relative;
+    }
+    .how-steps::before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 24px;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: auto;
+      background-image: radial-gradient(circle, var(--sage) 1.5px, transparent 1.5px);
+      background-size: 2px 12px;
+      background-repeat: repeat-y;
+      z-index: 0;
+      opacity: 0.5;
+    }
+    .chat-grid { grid-template-columns: 1fr; max-width: 480px; }
+    .bonus-list { gap: 28px; max-width: 460px; }
+    .bonus-row {
+      grid-template-columns: 1fr;
+      gap: 0;
+      background: var(--paper-warm);
+      border: 1px solid var(--linen);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+    }
+    .bonus-row:nth-child(even) .bonus-image { order: 0; }
+    .bonus-image {
+      border-radius: 0;
+      border: none;
+      border-bottom: 1px solid var(--linen);
+      aspect-ratio: 1 / 1;
+    }
+    .bonus-body {
+      padding: 20px 20px 22px;
+    }
+    .bonus-body h3 { font-size: 22px; margin-bottom: 10px; }
+    .bonus-body .lede { font-size: 14px; margin-bottom: 16px; }
+    .bonus-meta { padding-top: 14px; gap: 12px; }
+    .bonus-section { padding: 56px 0; }
+    .bonus-intro { margin-bottom: 36px; }
+    .problem-grid { grid-template-columns: repeat(2, 1fr); gap: 36px 24px; }
+    .why-grid { grid-template-columns: 1fr; }
+    .problem-bridge { margin-top: 50px; }
+    .who-content { grid-template-columns: 1fr; gap: 32px; text-align: center; }
+    .who-text { margin: 0 auto; }
+    .who-text > p { margin-left: auto; margin-right: auto; }
+    .who-list {
+      max-width: 520px;
+      margin: 0 auto;
+      text-align: left;
+    }
+    .who-image-slot { aspect-ratio: 1/1; max-width: 320px; }
+    .catalog-section { padding: 72px 0 60px; }
+    .catalog-track { padding: 12px 22px 32px; }
+    .catalog-card { flex-basis: 280px; }
+    .catalog-track::before, .catalog-track::after { flex-basis: 0; }
+    .section { padding: 48px 0; }
+    .final { padding: 48px 0; }
+  }
+
+  @media (max-width: 580px) {
+    body { font-size: 16px; }
+    .wrap, .wrap-narrow { padding: 0 22px; }
+    header,
+    section,
+    footer {
+      overflow-x: hidden;
+    }
+    h1 { font-size: 38px; }
+    h2 { font-size: 30px; }
+    .btn {
+      width: 100%;
+      max-width: 100%;
+      white-space: normal;
+      text-align: center;
+    }
+    .hero-trust {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      border-radius: 24px;
+      padding: 14px 16px;
+    }
+    .hero-trust-body {
+      text-align: center;
+    }
+    .hero-trust-caption {
+      margin: 0 auto;
+    }
+    .hero-media-wrap {
+      width: 100%;
+      max-width: min(100%, 420px);
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hero-pill-instant {
+      left: 12px;
+      top: -12px;
+    }
+    .hero-badge-patterns {
+      right: 6px;
+      bottom: -12px;
+      width: 78px;
+      height: 78px;
+    }
+    .hero-badge-num {
+      font-size: 24px;
+    }
+    .problem-grid { grid-template-columns: 1fr; gap: 22px; max-width: 460px; }
+    .problem-bridge {
+      gap: 10px;
+      padding: 0 8px;
+    }
+    .problem-bridge p {
+      white-space: normal;
+      max-width: 100%;
+      font-size: var(--t-base);
+      line-height: 1.35;
+    }
+    .bridge-line {
+      flex-basis: 32px;
+    }
+    .pain {
+      text-align: left;
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      grid-template-rows: auto auto;
+      column-gap: 16px;
+      row-gap: 4px;
+      align-items: start;
+      padding: 14px 0;
+    }
+    .pain-icon {
+      grid-row: 1 / 3;
+      grid-column: 1;
+      margin: 0;
+      width: 44px;
+      height: 44px;
+      align-self: center;
+    }
+    .pain h3 {
+      grid-column: 2;
+      grid-row: 1;
+      margin: 0;
+      font-size: 17px;
+      line-height: 1.25;
+    }
+    .pain p {
+      grid-column: 2;
+      grid-row: 2;
+      max-width: none;
+      font-size: 14px;
+      line-height: 1.5;
+      margin: 0;
+      color: var(--ink-soft);
+    }
+    .why-card { padding: 28px 24px; }
+  }
+
+  /* Reveal on scroll */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s var(--ease-out-quart),
+                transform 0.8s var(--ease-out-quart);
+  }
+  .reveal.in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+<script
+  src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+  data-utmify-prevent-xcod-sck
+  data-utmify-prevent-subids
+  async
+  defer
+></script>
+<script>
+window.pixelId = "6a5875332da7c955975c12f2";
+var a = document.createElement("script");
+a.setAttribute("async", "");
+a.setAttribute("defer", "");
+a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+document.head.appendChild(a);
+</script>
+</head>
+<body>
+
+<!-- ─── ANNOUNCEMENT BAR ─── -->
+<div class="announce">
+  <span class="announce-text">
+    <span class="announce-item announce-brand">O Ateliê de Papel</span>
+  </span>
+</div>
+
+<!-- ─── HERO ─── -->
+<header class="hero">
+  <div class="wrap">
+
+
+    <h1 class="hero-h1 reveal in">
+      O Maior Inimigo do Seu Sono Não É o Café...<br class="desktop-br"> É a <span class="accent">"Fadiga de Tela"</span>.
+    </h1>
+
+    <p class="hero-sub reveal in">
+      <span class="hero-sub-highlight">Isso NÃO é tentar meditar à força, nem tomar chás caros, nem rolar o feed do celular até a exaustão.</span>
+      É completamente diferente de tudo o que você já tentou para silenciar a cabeça à noite.
+    </p>
+
+    <!-- Trust row: avatars + stars + caption -->
+    <div class="hero-trust reveal in">
+      <div class="hero-avatars">
+        <div class="hero-avatar hero-avatar-1"><img src="images/hero-avatar-1.jpg" alt=""></div>
+        <div class="hero-avatar hero-avatar-2"><img src="images/hero-avatar-2.jpg" alt=""></div>
+        <div class="hero-avatar hero-avatar-3"><img src="images/hero-avatar-3.jpg" alt=""></div>
+      </div>
+      <div class="hero-trust-body">
+        <div class="hero-trust-stars">★★★★★</div>
+        <div class="hero-trust-caption"><strong>4,9 / 5</strong> · O botão de "desligar" diário validado por mais de 2.800 mulheres exaustas.</div>
+      </div>
+    </div>
+
+    <!-- Video / media — sits above the button on mobile, beside on desktop -->
+    <div class="hero-media-wrap reveal in">
+      <span class="hero-pill-instant"> ✨ Liberação Imediata!</span>
+      <div class="hero-media" data-slot="hero-loop">
+        <video autoplay="" muted="" loop="" playsinline="">
+          <source src="media/hero-loop.mp4" type="video/mp4">
+        </video>
+      </div>
+      <!-- Floating pattern badge -->
+      <div class="hero-badge hero-badge-patterns">
+        <span class="hero-badge-num">+200</span>
+        <span class="hero-badge-label">moldes</span>
+      </div>
+    </div>
+
+  </div>
+</header>
+<!-- ─── PROBLEM / AGITATION ─── -->
+<section class="section problem-section">
+  <div class="wrap">
+    <div class="problem-intro reveal">
+      <span class="eyebrow center">O SINTOMA DO ESGOTAMENTO INVISÍVEL</span>
+      <h2>Este ciclo noturno parece familiar para você?</h2>
+    </div>
+
+    <div class="problem-grid reveal">
+      <div class="pain">
+        <div class="pain-icon" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="3"></rect><line x1="12" y1="18" x2="12" y2="18"></line></svg>
+        </div>
+        <h3>A "Ressaca" de Tela</h3>
+        <p>Você deita querendo apenas descansar a mente. Acaba rolando o feed do celular por horas e termina a noite se sentindo ainda mais exausta e pilhada.</p>
+      </div>
+      <div class="pain">
+        <div class="pain-icon" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7l9-4 9 4M3 7v10l9 4 9-4V7M3 7l9 4 9-4M12 11v10"></path></svg>
+        </div>
+        <h3>A Frustração do "Falso Descanso"</h3>
+        <p>Tentar ler um livro ou focar em um filme, mas abandonar em 5 minutos porque sua cabeça não consegue parar de pensar nos problemas e boletos de amanhã.</p>
+      </div>
+      <div class="pain">
+        <div class="pain-icon" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>
+        </div>
+        <h3>Modo "Piloto Automático"</h3>
+        <p>Jantar, TV, celular, cama. O seu corpo apaga de cansaço extremo, mas o sono é leve, picotado, e não repara mais as suas energias.</p>
+      </div>
+      <div class="pain">
+        <div class="pain-icon" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-8h6v8"></path></svg>
+        </div>
+        <h3>O Desespero por Silêncio</h3>
+        <p>A necessidade urgente de ter um momento isolado, longe de telas, demandas, filhos e notificações, para fazer algo que seja puramente para você.</p>
+      </div>
+    </div>
+
+    <div class="problem-bridge reveal">
+      <span class="bridge-line"></span>
+      <p>É exatamente aqui que o "Truque das Mãos" quebra o ciclo.</p>
+      <span class="bridge-line"></span>
+    </div>
+  </div>
+</section>
+
+<!-- ─── WHY IT WORKS ─── -->
+<section class="section section-sage why-section">
+  <div class="wrap">
+    <div class="section-intro reveal">
+      <span class="eyebrow">A CIÊNCIA DO "TRUQUE DAS MÃOS"</span>
+      <h2>A técnica analógica que <em>resgata</em> sua paz mental entregando 4 alívios imediatos.</h2>
+      <p>Não é coincidência que mais de 2.800 mulheres adotaram essa rotina noturna. O movimento guiado entrega exatamente as quatro coisas que o seu sistema nervoso esgotado está implorando para ter:</p>
+    </div>
+
+    <div class="why-grid reveal">
+      <article class="why-card">
+        <div class="why-num">i.</div>
+        <h3>Zero Carga Mental</h3>
+        <p>Os moldes já vêm marcados e prontos. Você não precisa pensar, medir ou ter talento artístico. Basta seguir o caminho, permitindo que seu cérebro finalmente "desligue" enquanto as mãos trabalham sozinhas.</p>
+      </article>
+      <article class="why-card">
+        <div class="why-num">ii.</div>
+        <h3>A Queda do Cortisol</h3>
+        <p>Em apenas 15 minutos, a repetição física do fio desacelera sua respiração e estabiliza os batimentos. Na segunda semana, você vai desejar pegar a agulha em vez de pegar o celular.</p>
+      </article>
+      <article class="why-card">
+        <div class="why-num">iii.</div>
+        <h3>A Blindagem Contra as Telas</h3>
+        <p>É uma ruptura física do vício em rolagem infinita. O foco pontual resgata a sua concentração perdida e preenche o vazio angustiante que os vídeos curtos deixam no fim do dia.</p>
+      </article>
+      <article class="why-card">
+        <div class="why-num">iv.</div>
+        <h3>O Fim do Sentimento de "Inutilidade"</h3>
+        <p>Em vez de deitar sentindo que "só apagou incêndios e cuidou dos outros o dia todo", você cria algo lindo e real. É a recompensa visual imediata que devolve a sua sensação de capacidade e calma antes de dormir.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ─── WHO IT'S FOR ─── -->
+<section class="section who-section">
+  <div class="wrap">
+    <div class="section-intro reveal">
+      <span class="eyebrow">O FATOR ZERO ATRITO</span>
+      <h2>O Alívio Não Exige Talento (Nem Esforço Mental).</h2>
+      <p>Esqueça a pressão de ter que ser "criativa" ou habilidosa. Se você consegue segurar uma caneta, consegue aplicar o "Truque das Mãos". Nós removemos toda a parte difícil e frustrante do artesanato tradicional. Este sistema foi desenhado para entregar paz imediata a quem está com a mente no limite, sem que você precise aprender técnicas complexas e bem longe de qualquer tela brilhante.</p>
+    </div>
+
+    <div class="who-panels reveal">
+
+      <div class="who-panel is-active" id="who-calm" role="tabpanel">
+        <div class="who-content">
+          <div class="who-text">
+            <span class="step-label">PARA QUEM PRECISA DESLIGAR A MENTE</span>
+            <h3>Você está exausta de um jeito que apenas dormir não resolve mais.</h3>
+            <p>O rolar infinito do celular na cama só alimenta o seu esgotamento invisível. Você precisa desesperadamente de um refúgio para as mãos que não seja lavar louça, dobrar roupas ou resolver problemas da casa. O "Truque das Mãos" devolve o seu silêncio em 15 minutos. Sem telas brilhantes, sem notificações e sem algoritmos sugando sua energia.</p>
+            <ul class="who-list">
+              <li>Queda Imediata de Cortisol: Um ritual físico e tátil comprovado para estabilizar o sistema nervoso central antes de deitar.</li>
+              <li>O Fim do "Vazio Noturno": A recompensa visual de ver algo lindo nascer das suas mãos, resgatando seu foco e sua paz interior.</li>
+              <li>Zero Pressão (Seu Refúgio Seguro): Sem metas técnicas, sem precisar vender e sem obrigação de postar absolutamente nada.</li>
+            </ul>
+          </div>
+          <div class="who-visual">
+            <div class="who-image-slot" data-slot="who-calm-image">
+              <img src="images/who-calm.jpg" alt="Mãos trabalhando em bordado em papel com linhas verde sálvia e terracota, em uma tarde tranquila">
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── HOW IT WORKS ─── -->
+<section class="section how-section">
+  <div class="wrap">
+    <div class="how-intro reveal">
+      <span class="how-eyebrow">O SEU MAPA DE FUGA EM 3 PASSOS</span>
+      <h2>Da sua impressora ao <em>"silêncio mental"</em> em menos de 15 minutos.</h2>
+    </div>
+
+    <div class="how-steps reveal">
+
+      <div class="how-step">
+        <div class="how-step-num">1</div>
+        <div class="how-step-icon">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2M6 14h12v8H6z"></path></svg>
+        </div>
+        <h3>A Preparação</h3>
+        <p>Baixe seu acesso instantaneamente. Escolha o molde que mais combina com o seu dia e imprima em qualquer impressora doméstica comum. Sem depender de frete ou de entregas demoradas.</p>
+      </div>
+
+      <div class="how-step">
+        <div class="how-step-num">2</div>
+        <div class="how-step-icon">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7z"></path></svg>
+        </div>
+        <h3>O Desligamento</h3>
+        <p>Apenas siga o caminho já desenhado. Em poucos minutos, suas mãos assumem o ritmo, o estresse derrete e sua respiração acalma. Tudo usando apenas uma agulha e linhas baratas que você encontra em qualquer armarinho.</p>
+      </div>
+
+      <div class="how-step">
+        <div class="how-step-num">3</div>
+        <div class="how-step-icon">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+        </div>
+        <h3>A Recompensa Visual</h3>
+        <p>Sinta a paz e o orgulho absurdo de ver algo lindo nascer das suas mãos. Emoldure, presenteie quem você ama, ou simplesmente use a peça concluída como o seu troféu de que hoje você cuidou de si mesma.</p>
+      </div>
+
+    </div>
+
+    <div class="how-cta reveal">
+      <a href="#offer" class="btn">
+        QUERO COMEÇAR MEU RITUAL HOJE 
+        <span class="arrow">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CATALOG / WHAT YOU'LL MAKE ─── -->
+<section class="catalog-section">
+  <div class="wrap">
+    <div class="catalog-intro reveal">
+      <span class="eyebrow">O SEU "ARSENAL" DE ALÍVIO IMEDIATO</span>
+      <h2>200 "Válvulas de Escape" <em>Diferentes Para Você Escolher a Cada Noite.</em></h2>
+      <p>Seu acesso inclui 200 moldes terapêuticos organizados para a sua rotina. Se você teve um dia caótico e só tem 15 minutos, ou se precisa de uma imersão profunda para esquecer os problemas no fim de semana, existe um guia perfeito para o seu nível de estresse hoje. Apenas escolha, imprima e deixe a agulha calar os seus pensamentos.</p>
+    </div>
+  </div>
+
+  <!-- Full-bleed carousel -->
+  <div class="catalog-carousel reveal" aria-label="Categorias de moldes">
+    <div class="catalog-track">
+
+      <article class="catalog-card">
+        <div class="catalog-media" data-slot="catalog-cards-bookmarks">
+          <img src="images/catalog-cards-bookmarks.jpg" alt="Três marcadores de página bordados em papel com padrões florais">
+        </div>
+        <div class="catalog-body">
+          <h3>Alívio Rápido (15 min)</h3>
+        </div>
+      </article>
+
+      <article class="catalog-card">
+        <div class="catalog-media" data-slot="catalog-framed-florals">
+          <img src="images/catalog-framed-florals.jpg" alt="Buquê de flores silvestres em bordado em papel emoldurado">
+        </div>
+        <div class="catalog-body">
+          <h3>Foco Profundo (Fim de semana)</h3>
+        </div>
+      </article>
+
+      <article class="catalog-card">
+        <div class="catalog-media" data-slot="catalog-wedding">
+          <img src="images/catalog-wedding.jpg" alt="Cartão de lugar para casamento com nome bordado">
+        </div>
+        <div class="catalog-body">
+          <h3>Micropausas (10 Minutos)</h3>
+        </div>
+      </article>
+
+      <article class="catalog-card">
+        <div class="catalog-media" data-slot="catalog-baby">
+          <img src="images/cartao-ola-mundo.webp" alt="Cartão de anúncio de bebê com passarinho bordado e a frase Olá, mundo">
+        </div>
+        <div class="catalog-body">
+          <h3>Presentes com Alma</h3>
+        </div>
+      </article>
+
+      <article class="catalog-card">
+        <div class="catalog-media" data-slot="catalog-mindfulness">
+          <img src="images/cartao-esteja-aqui-agora.webp" alt="Bordado em papel com a frase Esteja aqui agora sobre um diário">
+        </div>
+        <div class="catalog-body">
+          <h3>Descompressão Total</h3>
+        </div>
+      </article>
+
+      <article class="catalog-card">
+        <div class="catalog-media" data-slot="catalog-seasonal">
+          <img src="images/catalog-seasonal.jpg" alt="Quatro cartões sazonais de bordado em papel">
+        </div>
+        <div class="catalog-body">
+          <h3>Resgate de Foco</h3>
+        </div>
+      </article>
+
+      <article class="catalog-card">
+        <div class="catalog-media" data-slot="catalog-monograms">
+          <img src="images/catalog-monograms.jpg" alt="Cartão de bordado em papel com monograma M e E">
+        </div>
+        <div class="catalog-body">
+          <h3>Seu Refúgio Particular</h3>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- Carousel controls -->
+    <div class="catalog-controls">
+      <button class="catalog-arrow catalog-prev" aria-label="Anterior">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      </button>
+      <button class="catalog-arrow catalog-next" aria-label="Próximo">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </button>
+    </div>
+  </div>
+
+</section>
+
+<!-- ─── BONUS STACK ─── -->
+<section class="bonus-section" id="bonuses">
+  <div class="wrap">
+
+    <div class="bonus-intro reveal">
+      <span class="bonus-pill">🎁 LIBERADO HOJE: O SEU "KIT DE EMERGÊNCIA" MENTAL</span>
+      <h2>3 Ferramentas Extras de Descompressão,<em>(Valor de R$ 147)</em>, Inclusas Gratuitamente.</h2>
+      <p>Um pacote de ferramentas bônus desenhado para blindar a sua rotina contra o estresse e maximizar o seu relaxamento. Disponível sem custo adicional apenas para quem iniciar o ritual hoje.</p>
+    </div>
+
+    <div class="bonus-list">
+
+      <!-- BONUS 01 — Your First $500 Playbook -->
+      <article class="bonus-row reveal">
+        <div class="bonus-image">
+          <span class="bonus-num-tag">Bônus 1</span>
+          <img src="images/desliga-mente-flatlay.webp" alt="Guia Seus Primeiros US$500: roteiros de venda, calendário anual de ideias e lista de verificação das primeiras 5 vendas">
+        </div>
+        <div class="bonus-body">
+          <span class="step-label">DA EXAUSTÃO AO DESCANSO</span>
+          <h3>Guia O "Protocolo Desliga-Mente"</h3>
+          <p class="lede">
+            O roteiro exato para preparar o seu ambiente em 3 minutos e blindar seus momentos de paz contra interrupções. Descubra os ritmos de respiração para alinhar com o "Truque das Mãos", garantindo que você nunca mais deite na cama com a cabeça a mil por hora.
+          </p>
+          <div class="bonus-meta">
+            <span class="bonus-free">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Incluído grátis
+            </span>
+            <span class="bonus-value"><s>R$ 47</s> <strong>Grátis hoje</strong></span>
+          </div>
+        </div>
+      </article>
+
+      <!-- BONUS 02 — FairPrice™ Profit Toolkit -->
+      <article class="bonus-row reveal">
+        <div class="bonus-image">
+          <span class="bonus-num-tag">Bônus 2</span>
+          <img src="images/diario-da-mente-desk.webp" alt="Kit de Lucro FairPrice: caderno da artesã, calculadora e guia de fornecedores">
+        </div>
+        <div class="bonus-body">
+          <span class="step-label">ELIMINE O ESTRESSE ANTES MESMO DE COMEÇAR</span>
+          <h3>O Guia "Zero Atrito" (Materiais + Diário)</h3>
+          <p class="lede">
+            O maior inimigo de um novo hábito é a preguiça e o medo de gastar muito. Nós resolvemos isso. Esqueça bater perna na rua: receba nossa lista secreta de fornecedores para comprar linhas e papéis por centavos, entregues na sua porta. Inclui também o "Caderno do Esvaziamento", um guia prático para você despejar suas preocupações e pendências no papel ANTES de pegar na agulha, garantindo um foco profundo e 100% relaxante.
+          </p>
+          <div class="bonus-meta">
+            <span class="bonus-free">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Incluído grátis
+            </span>
+            <span class="bonus-value"><s>R$ 47</s> <strong>Grátis hoje</strong></span>
+          </div>
+        </div>
+      </article>
+
+      <!-- BONUS 03 — The Atelier Showcase Kit -->
+      <article class="bonus-row reveal">
+        <div class="bonus-image">
+          <span class="bonus-num-tag">Bônus 3</span>
+          <img src="images/ritual-2-minutos-flatlay.webp" alt="Kit Vitrine Atelier: mini-guia de fotografia, modelos de composição para fotos em vista superior e fórmula de anúncio para Etsy">
+        </div>
+        <div class="bonus-body">
+          <span class="step-label">DESCONECTE. PREPARE. RESPIRE.</span>
+          <h3>O Guia "Santuário Noturno"</h3>
+          <p class="lede">
+            O ambiente ao seu redor dita o nível do seu estresse. Descubra a fórmula de 2 minutos para ajustar a iluminação, os sons e a mesa da sua casa, sinalizando fisicamente para o seu cérebro que o "modo sobrevivência" do dia acabou. Transforme qualquer canto da sua sala em um refúgio impenetrável contra notificações, algoritmos e cobranças.
+          </p>
+          <div class="bonus-meta">
+            <span class="bonus-free">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Incluído grátis
+            </span>
+            <span class="bonus-value"><s>R$ 53</s> <strong>Grátis hoje</strong></span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+  </div>
+</section>
+<!-- ─── MEGA OFFER — PaperProfit-modeled ─── -->
+<section class="po-offer" id="offer">
+
+  <!-- Top: SPECIAL OFFER pill + timer -->
+  <div class="po-top reveal">
+    <div class="po-pill-stack">
+      <span class="po-pill po-pill-yellow">O SEU PASSE PARA O SILÊNCIO</span>
+      <span class="po-pill-script">Só hoje</span>
+    </div>
+    <p class="po-subtitle">Pagamento Único.</p>
+
+    <div class="po-timer-card">
+      <div class="po-timer-label">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        Esta oferta expira em
+      </div>
+      <div class="po-timer-clock" id="megaCountdown">
+        <div class="po-timer-unit"><span class="po-timer-num" data-cd="hours">15</span><span class="po-timer-lbl">Horas</span></div>
+        <div class="po-timer-sep">:</div>
+        <div class="po-timer-unit"><span class="po-timer-num" data-cd="minutes">00</span><span class="po-timer-lbl">Minutos</span></div>
+        <div class="po-timer-sep">:</div>
+        <div class="po-timer-unit"><span class="po-timer-num" data-cd="seconds">00</span><span class="po-timer-lbl">Segundos</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- The card itself -->
+  <div class="po-card reveal">
+
+    <!-- Launch tag floating on top -->
+    <div class="po-launch-tag">★ OFERTA DE LANÇAMENTO ★</div>
+
+    <!-- Product name + bundle -->
+    <h3 class="po-product-name">O PACOTE<br>"DESLIGA-MENTE"</h3>
+    <p class="po-product-bundle">(Acesso Completo ao Ateliê de Papel)</p>
+
+    <!-- Price row -->
+    <div class="po-price-row">
+      <span class="po-price-was">R$ 297</span>
+      <span class="po-price-save">ECONOMIZE 90%</span>
+    </div>
+    <div class="po-price-now">R$ 27</div>
+
+    <!-- Checklist of inclusions -->
+    <ul class="po-checklist">
+      <li><span class="po-check">✓</span> <span class="po-emoji">📚</span> <span class="po-li-text"><strong>O Acervo de Alívio:</strong> 200 guias terapêuticos + instruções em vídeo sem nenhuma complicação técnica.</span></li>
+      <li><span class="po-check">✓</span> <span class="po-emoji">⚡</span> <span class="po-li-text"><strong>Resultados Imediatos:</strong> sinta a queda brusca da ansiedade e do estresse já na sua primeira noite.</span></li>
+      <li><span class="po-check">✓</span> <span class="po-emoji">🌿</span> <span class="po-li-text">Mãos calmas, mente tranquila (ritual de 7 dias)</span></li>
+      <li><span class="po-check">✓</span> <span class="po-emoji">🎨</span> <span class="po-li-text"><strong>Guia "Zero Atrito":</strong> lista secreta de onde comprar materiais baratos no Brasil (ou online) + PDF à prova de erros para você não precisar "pensar", apenas seguir.</span></li>
+      <li><span class="po-check">✓</span> <span class="po-emoji">📖</span> <span class="po-li-text"><strong>Variedade Terapêutica:</strong> inclui as categorias de Micropausas (10 min), Resgate de Foco e Seu Refúgio Particular.</span></li>
+      <li class="po-li-highlight"><span class="po-check">✓</span> <span class="po-emoji">🚀</span> <span class="po-li-text"><strong>ACESSO VITALÍCIO</strong></span></li>
+    </ul>
+
+    <!-- Bonuses callout -->
+    <div class="po-bonuses">
+      <div class="po-bonuses-icon">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"></polyline><rect x="2" y="7" width="20" height="5"></rect><line x1="12" y1="22" x2="12" y2="7"></line><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path></svg>
+      </div>
+      <div class="po-bonuses-text">
+        <div class="po-bonuses-title">MAIS 3 BÔNUS<br>EXCLUSIVOS GRÁTIS</div>
+        <div class="po-bonuses-meta">
+          <s>Valor: R$ 147</s>
+          <span class="po-bonuses-today">HOJE: GRÁTIS</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA Button -->
+    <a href="https://hub.usepinpay.com/pay/2c94db86-ab01-441c-b96b-3f6767e89e07" onclick="goToCheckout(event)" class="po-btn">
+      <span class="po-btn-main">QUERO GARANTIR MINHA PAZ MENTAL AGORA</span>
+      <span class="po-btn-sub">Pagamento Seguro</span>
+    </a>
+
+  </div>
+</section>
+
+
+<!-- ─── TESTIMONIALS — WhatsApp chat style ─── -->
+<section class="section chat-section">
+  <div class="wrap">
+
+    <div class="chat-intro reveal">
+      <span class="how-eyebrow">💭 MULHERES REAIS, ALÍVIO REAL</span>
+      <h2>Elas trocaram a exaustão das telas pelo "silêncio mental". <em>E a paz voltou.</em>.</h2>
+      <p>Mensagens reais de mulheres que usaram o "Truque das Mãos" para desativar o modo sobrevivência, desacelerar o cérebro e resgatar suas noites de sono limpo este mês.</p>
+    </div>
+
+    <div class="chat-grid reveal">
+
+      <!-- Chat 1: Camila -->
+      <article class="chat-card">
+        <header class="chat-header">
+          <div class="chat-avatar chat-avatar-1">C</div>
+          <div class="chat-meta">
+            <div class="chat-name">Camila R.</div>
+            <div class="chat-status"><span class="chat-online-dot"></span>online</div>
+          </div>
+          <div class="chat-header-icons">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"></path></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"></path></svg>
+          </div>
+        </header>
+        <div class="chat-body">
+          <div class="chat-date-sep"><span>HOJE</span></div>
+          <div class="chat-bubble chat-bubble-in">
+            <p>Oi! Eu precisava contar: minha primeira peça ficou pronta 😍 Bordei o molde de flores silvestres.</p>
+            <span class="chat-time">10:14</span>
+          </div>
+          <div class="chat-bubble chat-bubble-in">
+            <p>Passei 2 horas nele e, pela primeira vez em meses, não toquei no celular e nem pensei nos problemas do trabalho 🤯</p>
+            <span class="chat-time">10:15</span>
+          </div>
+          <div class="chat-bubble chat-bubble-in chat-bubble-img">
+            <div class="chat-photo" data-slot="chat-megan"><img src="images/chat-megan.jpg" alt="Bordado emoldurado"></div>
+            <span class="chat-time">10:16</span>
+          </div>
+          <div class="chat-bubble chat-bubble-out">
+            <p>Ficou lindo!! 😍 Vai colocar na parede?</p>
+            <span class="chat-time">10:22 <span class="chat-checks">✓✓</span></span>
+          </div>
+          <div class="chat-bubble chat-bubble-in">
+            <p>Já emoldurei! Vai ficar no meu quarto 🖼️ É o meu troféu oficial de paz mental.</p>
+            <span class="chat-time">10:23</span>
+          </div>
+        </div>
+        <footer class="chat-footer">
+          <span class="chat-location">📍 São Paulo, SP</span>
+        </footer>
+      </article>
+
+      <!-- Chat 2: Mariana -->
+      <article class="chat-card">
+        <header class="chat-header">
+          <div class="chat-avatar chat-avatar-2">M</div>
+          <div class="chat-meta">
+            <div class="chat-name">Mariana N.</div>
+            <div class="chat-status">visto por último hoje</div>
+          </div>
+          <div class="chat-header-icons">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"></path></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"></path></svg>
+          </div>
+        </header>
+        <div class="chat-body">
+          <div class="chat-date-sep"><span>ONTEM</span></div>
+          <div class="chat-bubble chat-bubble-in">
+            <p>Sério, eu achei que não ia ter paciência. Meu cérebro não parava um segundo. 🌪️</p>
+            <span class="chat-time">14:05</span>
+          </div>
+          <div class="chat-bubble chat-bubble-in">
+            <p>Fiz aqueles marcadores rápidos que você sugeriu no guia para começar.</p>
+            <span class="chat-time">14:06</span>
+          </div>
+          <div class="chat-bubble chat-bubble-in chat-bubble-img">
+            <div class="chat-photo" data-slot="chat-priya"><img src="images/chat-priya.webp" alt="Marcadores prontos para envio"></div>
+            <span class="chat-time">14:07</span>
+          </div>
+          <div class="chat-bubble chat-bubble-out">
+            <p>Que incrível!! O Truque das Mãos funcionou rápido com você? 💚</p>
+            <span class="chat-time">14:15 <span class="chat-checks">✓✓</span></span>
+          </div>
+          <div class="chat-bubble chat-bubble-in">
+            <p>Menina, foram 15 minutos e minha respiração já mudou. Foi o primeiro final de semana que eu realmente consegui relaxar a cabeça e dormir a noite toda 😭</p>
+            <span class="chat-time">14:16</span>
+          </div>
+        </div>
+        <footer class="chat-footer">
+          <span class="chat-location">📍 Belo Horizonte, MG</span>
+        </footer>
+      </article>
+
+      <!-- Chat 3: Denise -->
+      <article class="chat-card">
+        <header class="chat-header">
+          <div class="chat-avatar chat-avatar-3">D</div>
+          <div class="chat-meta">
+            <div class="chat-name">Denise K.</div>
+            <div class="chat-status">visto por último ontem</div>
+          </div>
+          <div class="chat-header-icons">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"></path></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"></path></svg>
+          </div>
+        </header>
+        <div class="chat-body">
+          <div class="chat-date-sep"><span>SEGUNDA</span></div>
+          <div class="chat-bubble chat-bubble-in">
+            <p>Comecei a bordar há três semanas. Eu estava numa crise de exaustão terrível e não conseguia desligar a mente à noite 🥺</p>
+            <span class="chat-time">11:32</span>
+          </div>
+          <div class="chat-bubble chat-bubble-in">
+            <p>Fiz uma peça para cada neto esta semana 💕</p>
+            <span class="chat-time">11:33</span>
+          </div>
+          <div class="chat-bubble chat-bubble-in chat-bubble-img">
+            <div class="chat-photo" data-slot="chat-diane"><img src="images/chat-diane.jpg" alt="Três cartões bordados"></div>
+            <span class="chat-time">11:34</span>
+          </div>
+          <div class="chat-bubble chat-bubble-out">
+            <p>Ficaram lindos 🥰 E como você está se sentindo?</p>
+            <span class="chat-time">11:45 <span class="chat-checks">✓✓</span></span>
+          </div>
+          <div class="chat-bubble chat-bubble-in">
+            <p>O ritual de atenção plena antes de dormir salvou as minhas noites. Sinceramente, foi o melhor investimento que já fiz na minha saúde mental em anos ✨</p>
+            <span class="chat-time">11:46</span>
+          </div>
+        </div>
+        <footer class="chat-footer">
+          <span class="chat-location">📍 Florianópolis, SC</span>
+        </footer>
+      </article>
+
+    </div>
+
+  </div>
+</section>
+<!-- ─── GUARANTEE ─── -->
+<section class="section section-sage">
+  <div class="wrap">
+    <div class="guarantee reveal">
+      <div class="guarantee-seal">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          <polyline points="9 12 11 14 15 10"></polyline>
+        </svg>
+      </div>
+      <span class="eyebrow center">RISCO ZERO -  SUA PAZ E SEU SONO EM PRIMEIRO LUGAR</span>
+      <h2>7 Noites de Teste. Sem Perguntas. Sem Atrito.</h2>
+      <p>
+        Experimente o ritual completo hoje mesmo. Imprima alguns moldes, faça seus primeiros pontos e sinta a sua mente silenciar hoje à noite. Se por qualquer motivo você sentir que este hábito não trouxe o alívio que a sua rotina precisa, basta nos enviar um único e-mail em até 7 dias. Devolvemos 100% do seu dinheiro imediatamente. E para mostrar o quanto confiamos na sua transformação: você pode continuar com todos os 200 moldes que já baixou. Nós seguimos em paz, e você com a mente leve.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FAQ ─── -->
+<section class="section">
+  <div class="wrap-narrow">
+    <div class="section-intro reveal">
+      <span class="eyebrow">Perguntas frequentes</span>
+      <h2>As dúvidas sinceras, respondidas.</h2>
+    </div>
+
+    <div class="faq reveal">
+
+      <div class="faq-item">
+        <button class="faq-q" id="faq-q-1" aria-expanded="false" aria-controls="faq-a-1">
+          Nunca bordei na vida. Vou ficar perdida?
+          <span class="plus">+</span>
+        </button>
+        <div class="faq-a" id="faq-a-1" role="region" aria-labelledby="faq-q-1"><div class="faq-a-inner">
+          De forma alguma. Nós não criamos um "curso" complicado, criamos um guia de alívio terapêutico. O material foi desenhado exatamente para quem nunca segurou uma agulha e está com a mente exausta. Os vídeos iniciais são curtos, direto ao ponto, e a maioria das mulheres termina a primeira peça (e sente a ansiedade baixar) já no primeiro dia.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" id="faq-q-2" aria-expanded="false" aria-controls="faq-a-2">
+          O que eu realmente preciso comprar para começar?
+          <span class="plus">+</span>
+        </button>
+        <div class="faq-a" id="faq-a-2" role="region" aria-labelledby="faq-q-2"><div class="faq-a-inner">
+          Quase nada. Com menos de R$ 30 em materiais você já começa. Tudo o que você precisa são linhas simples e agulhas que podem ser compradas em qualquer armarinho de bairro, ou encomendadas baratinho na Shopee e no Mercado Livre. O nosso Guia Zero Atrito mostra exatamente o que pedir.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" id="faq-q-3" aria-expanded="false" aria-controls="faq-a-3">
+          Qual é a diferença entre bordado em papel e bordado em tecido?
+          <span class="plus">+</span>
+        </button>
+        <div class="faq-a" id="faq-a-3" role="region" aria-labelledby="faq-q-3"><div class="faq-a-inner">
+          O bordado em tecido exige bastidor, tensão, transferência de desenho e muita concentração (o que pode gerar frustração). O bordado em papel remove tudo isso. Os furos já vêm pré-marcados no cartão. Você não precisa "pensar", basta seguir o caminho. É uma simetria perfeita que exige zero esforço mental, tornando o relaxamento muito mais rápido.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" id="faq-q-4" aria-expanded="false" aria-controls="faq-a-4">
+          Minha rotina é um caos. Preciso de muito tempo livre para isso funcionar?
+          <span class="plus">+</span>
+        </button>
+        <div class="faq-a" id="faq-a-4" role="region" aria-labelledby="faq-q-4"><div class="faq-a-inner">
+          Pelo contrário. O "Truque das Mãos" foi feito para se encaixar no caos. Você não precisa de horas livres. Temos uma categoria inteira de peças para "Micropausas" que levam apenas 10 a 15 minutos. É o tempo exato para você baixar o cortisol no fim da noite antes de ir deitar, sem comprometer a sua agenda.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" id="faq-q-5" aria-expanded="false" aria-controls="faq-a-5">
+          Por quanto tempo eu tenho acesso?
+          <span class="plus">+</span>
+        </button>
+        <div class="faq-a" id="faq-a-5" role="region" aria-labelledby="faq-q-5"><div class="faq-a-inner">
+          Para sempre. Você faz um pagamento único e fica com tudo liberado. O seu arsenal de 200 guias de relaxamento estará sempre lá, pronto para ser acessado nas noites em que você mais precisar silenciar a mente.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" id="faq-q-7" aria-expanded="false" aria-controls="faq-a-7">
+          E se não funcionar para mim?
+          <span class="plus">+</span>
+        </button>
+        <div class="faq-a" id="faq-a-7" role="region" aria-labelledby="faq-q-7"><div class="faq-a-inner">
+          Basta nos enviar um e-mail em até 7 dias e faremos o reembolso integral, sem formulários chatos e sem perguntas. E para mostrar nossa confiança no seu alívio, você pode continuar com todos os moldes que já baixou. Preferimos que você saia com a mente tranquila a ficar frustrada.
+        </div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── FINAL CTA ─── -->
+<section class="final section-warm">
+  <div class="wrap-narrow">
+    <div class="reveal">
+      <span class="eyebrow">A SUA ÚLTIMA DECISÃO DE HOJE</span>
+      <h2>Hoje à noite, em vez de rolar a tela, <em>borde.</em></h2>
+      <p>
+        A janela promocional com os 3 Bônus de Emergência acompanha o contador desta página. Depois que o prazo de hoje terminar, o pacote volta ao seu valor normal de R$ 297. Mas o verdadeiro custo de ignorar isso não é financeiro: é passar mais uma noite com a cabeça a mil por hora, exausta, repetindo o mesmo ciclo de amanhã. A escolha entre o caos e o silêncio está nas suas mãos.
+      </p>
+      <a href="#offer" class="btn">
+        Quero Desligar Minha Ansiedade Hoje (Acesso Imediato + Bônus)
+        <span class="arrow">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="wrap">
+    <h4 class="footer-brand">O Ateliê de Papel</h4>
+    <p class="footer-tag">Mãos tranquilas. Mente calma. Papel bonito.</p>
+    <div class="copy">© 2026 O Ateliê de Papel · Todos os Direitos Reservados.</div>
+  </div>
+</footer>
+
+<script>
+  // FAQ accordion
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const btn = item.querySelector('.faq-q');
+    btn.addEventListener('click', () => {
+      const open = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => {
+        i.classList.remove('open');
+        const itemBtn = i.querySelector('.faq-q');
+        if (itemBtn) itemBtn.setAttribute('aria-expanded', 'false');
+      });
+      if (!open) {
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+  // Catalog carousel — horizontal scroll with arrow controls
+  (function () {
+    const track = document.querySelector('.catalog-track');
+    const prev = document.querySelector('.catalog-prev');
+    const next = document.querySelector('.catalog-next');
+    if (!track || !prev || !next) return;
+    const scrollByCard = (dir) => {
+      const card = track.querySelector('.catalog-card');
+      if (!card) return;
+      const cardWidth = card.getBoundingClientRect().width;
+      const gap = parseFloat(getComputedStyle(track).gap) || 24;
+      track.scrollBy({ left: dir * (cardWidth + gap), behavior: 'smooth' });
+    };
+    prev.addEventListener('click', () => scrollByCard(-1));
+    next.addEventListener('click', () => scrollByCard(1));
+
+    // Update arrow disabled state
+    const updateArrows = () => {
+      const maxScroll = track.scrollWidth - track.clientWidth - 4;
+      prev.toggleAttribute('disabled', track.scrollLeft <= 4);
+      next.toggleAttribute('disabled', track.scrollLeft >= maxScroll);
+    };
+    track.addEventListener('scroll', updateArrows, { passive: true });
+    window.addEventListener('resize', updateArrows);
+    updateArrows();
+  })();
+
+  // Countdown — Hours : Minutes : Seconds (until the end of the current day)
+  (function () {
+    const el = document.getElementById('megaCountdown');
+    if (!el) return;
+    const nums = {
+      hours: el.querySelector('[data-cd="hours"]'),
+      minutes: el.querySelector('[data-cd="minutes"]'),
+      seconds: el.querySelector('[data-cd="seconds"]'),
+    };
+    function getTarget() {
+      const now = Date.now();
+      const endOfDay = new Date();
+      endOfDay.setHours(23, 59, 59, 999);
+      if (endOfDay.getTime() <= now) {
+        endOfDay.setDate(endOfDay.getDate() + 1);
+        endOfDay.setHours(23, 59, 59, 999);
+      }
+      return endOfDay.getTime();
+    }
+    let target = getTarget();
+    function pad(n) { return n < 10 ? '0' + n : '' + n; }
+    function tick() {
+      const diff = target - Date.now();
+      if (diff <= 0) {
+        target = getTarget();
+        return;
+      }
+      const s = Math.floor(diff / 1000);
+      if (nums.hours) nums.hours.textContent = pad(Math.floor(s / 3600));
+      if (nums.minutes) nums.minutes.textContent = pad(Math.floor((s % 3600) / 60));
+      if (nums.seconds) nums.seconds.textContent = pad(s % 60);
+    }
+    tick();
+    setInterval(tick, 1000);
+  })();
+
+  // Reveal on scroll (IntersectionObserver)
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+
+<!-- ============================================================
+     SMART CHECKOUT
+     Redirects to Shopify after clearing previous cart via iframe.
+     ============================================================ -->
+<script>
+(function() {
+  // Smart checkout function
+  window.goToCheckout = function(e) {
+    if (e && e.preventDefault) e.preventDefault();
+
+    // Idempotency guard — prevent double fire
+    if (window._goCheckoutFired) return;
+    window._goCheckoutFired = true;
+
+    var base = "https://hub.usepinpay.com/pay/2c94db86-ab01-441c-b96b-3f6767e89e07";
+
+    window.location.href = base;
+  };
+})();
+</script>
+
+
+<!-- ============================================================
+     PURCHASE TOAST
+     Social proof: rotating "X from Y just purchased" notifications.
+     Brazilian names + city pairings plausible for the local offer.
+     Starts 8s after load, repeats every 22-35s with random delay.
+     ============================================================ -->
+<style>
+  .pt-toast {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 9999;
+    background: var(--paper-warm, #faf6ef);
+    border: 1px solid oklch(86% 0.020 90 / 1);
+    border-radius: 14px;
+    padding: 12px 16px 12px 14px;
+    box-shadow: 0 18px 40px -16px oklch(38% 0.045 145 / 0.32);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    max-width: 320px;
+    font-family: 'Inter', system-ui, sans-serif;
+    transform: translateY(140%);
+    opacity: 0;
+    transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease;
+    pointer-events: none;
+  }
+  .pt-toast.show {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .pt-toast-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, oklch(85% 0.060 35), oklch(72% 0.090 30));
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    color: white;
+    font-size: 18px;
+  }
+  .pt-toast-body {
+    flex: 1;
+    min-width: 0;
+  }
+  .pt-toast-line1 {
+    font-size: 13px;
+    color: oklch(20% 0.020 145);
+    line-height: 1.35;
+    margin: 0;
+  }
+  .pt-toast-line1 strong {
+    font-weight: 600;
+  }
+  .pt-toast-line2 {
+    font-size: 11px;
+    color: oklch(48% 0.020 145);
+    margin: 3px 0 0;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .pt-toast-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: oklch(70% 0.140 145);
+    box-shadow: 0 0 0 3px oklch(70% 0.140 145 / 0.22);
+    animation: pt-pulse 1.8s infinite;
+  }
+  .pt-toast-close {
+    background: none;
+    border: none;
+    color: oklch(60% 0.020 145);
+    cursor: pointer;
+    padding: 0;
+    width: 22px;
+    height: 22px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    border-radius: 50%;
+    transition: background 0.2s;
+  }
+  .pt-toast-close:hover {
+    background: oklch(94% 0.012 90);
+  }
+  @keyframes pt-pulse {
+    0%, 100% { box-shadow: 0 0 0 3px oklch(70% 0.140 145 / 0.22); }
+    50% { box-shadow: 0 0 0 6px oklch(70% 0.140 145 / 0); }
+  }
+  @media (max-width: 580px) {
+    .pt-toast {
+      bottom: 12px;
+      left: 12px;
+      right: 12px;
+      max-width: none;
+    }
+  }
+</style>
+
+<script>
+(function() {
+  // Buyer pool — national names + high-stress urban centers
+  var BUYERS = [
+    ['Camila M.', 'São Paulo, SP'],
+    ['Juliana R.', 'Rio de Janeiro, RJ'],
+    ['Mariana S.', 'Belo Horizonte, MG'],
+    ['Fernanda A.', 'Brasília, DF'],
+    ['Patrícia L.', 'Curitiba, PR'],
+    ['Aline C.', 'Porto Alegre, RS'],
+    ['Renata B.', 'Campinas, SP'],
+    ['Larissa T.', 'Recife, PE'],
+    ['Bruna F.', 'Salvador, BA'],
+    ['Isabela P.', 'Fortaleza, CE'],
+    ['Carolina V.', 'Goiânia, GO'],
+    ['Thaís N.', 'Florianópolis, SC'],
+    ['Bianca D.', 'Niterói, RJ'],
+    ['Priscila G.', 'Vitória, ES'],
+    ['Amanda E.', 'Manaus, AM']
+  ];
+
+  var TIME_PHRASES = [
+    'agora mesmo',
+    'há 1 minuto',
+    'há 2 minutos',
+    'há 3 minutos',
+    'há 5 minutos',
+    'há 7 minutos',
+    'há 12 minutos',
+    'há alguns minutos'
+  ];
+
+  var BONUSES = [
+    'Pacote "Desliga-Mente" (O Ateliê de Papel) — Oferta Especial por R$ 27'
+  ];
+
+  var toast = null;
+  var hideTimer = null;
+  var shownCount = 0;
+  var maxShown = 8; // Max toasts per session, then stop
+
+  function createToast() {
+    var el = document.createElement('div');
+    el.className = 'pt-toast';
+    el.setAttribute('role', 'status');
+    el.setAttribute('aria-live', 'polite');
+    el.innerHTML =
+      '<div class="pt-toast-icon">🧵</div>' +
+      '<div class="pt-toast-body">' +
+        '<p class="pt-toast-line1"><strong class="pt-name"></strong> acabou de garantir o <strong class="pt-product"></strong></p>' +
+        '<p class="pt-toast-line2"><span class="pt-toast-dot"></span><span class="pt-time"></span> · <span class="pt-city"></span></p>' +
+      '</div>' +
+      '<button class="pt-toast-close" aria-label="Fechar notificação">' +
+        '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>' +
+      '</button>';
+
+    el.querySelector('.pt-toast-close').addEventListener('click', function() {
+      hideToast();
+      shownCount = maxShown; // Stop showing if user dismissed
+    });
+
+    document.body.appendChild(el);
+    return el;
+  }
+
+  function showToast() {
+    if (shownCount >= maxShown) return;
+    if (!toast) toast = createToast();
+
+    var buyer = BUYERS[Math.floor(Math.random() * BUYERS.length)];
+    var time = TIME_PHRASES[Math.floor(Math.random() * TIME_PHRASES.length)];
+    var product = BONUSES[Math.floor(Math.random() * BONUSES.length)];
+
+    toast.querySelector('.pt-name').textContent = buyer[0];
+    toast.querySelector('.pt-city').textContent = buyer[1];
+    toast.querySelector('.pt-time').textContent = time;
+    toast.querySelector('.pt-product').textContent = product;
+
+    toast.classList.add('show');
+    shownCount++;
+
+    clearTimeout(hideTimer);
+    hideTimer = setTimeout(hideToast, 6500); // Show for 6.5s
+  }
+
+  function hideToast() {
+    if (toast) toast.classList.remove('show');
+  }
+
+  function scheduleNext() {
+    if (shownCount >= maxShown) return;
+    var nextDelay = 22000 + Math.random() * 13000; // 22-35s
+    setTimeout(function() {
+      showToast();
+      setTimeout(scheduleNext, 7000);
+    }, nextDelay);
+  }
+
+  // First toast after 8 seconds
+  setTimeout(function() {
+    showToast();
+    scheduleNext();
+  }, 8000);
+})();
+</script>
+
+
+
+</body></html>
