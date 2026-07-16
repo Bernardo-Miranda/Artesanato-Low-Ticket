@@ -2588,7 +2588,7 @@ document.head.appendChild(a);
     </div>
 
     <!-- CTA Button -->
-    <a href="https://hub.usepinpay.com/pay/2c94db86-ab01-441c-b96b-3f6767e89e07" onclick="goToCheckout(event)" class="po-btn">
+    <a href="https://pagamento.ateliedepapel.site/pay/2c94db86-ab01-441c-b96b-3f6767e89e07" onclick="goToCheckout(event)" class="po-btn">
       <span class="po-btn-main">QUERO GARANTIR MINHA PAZ MENTAL AGORA</span>
       <span class="po-btn-sub">Pagamento Seguro</span>
     </a>
@@ -2951,10 +2951,48 @@ document.head.appendChild(a);
 
 <!-- ============================================================
      SMART CHECKOUT
-     Redirects to Shopify after clearing previous cart via iframe.
+     Redirects to checkout with preserved tracking params.
      ============================================================ -->
 <script>
 (function() {
+  var CHECKOUT_URL = "https://pagamento.ateliedepapel.site/pay/2c94db86-ab01-441c-b96b-3f6767e89e07";
+  var TRACKING_KEYS = [
+    'utm_source',
+    'utm_medium',
+    'utm_campaign',
+    'utm_term',
+    'utm_content',
+    'utm_id',
+    'fbclid',
+    'gclid',
+    'gbraid',
+    'wbraid',
+    'ttclid',
+    'src'
+  ];
+
+  function getStoredValue(key) {
+    try {
+      return sessionStorage.getItem(key) || '';
+    } catch (e) {
+      return '';
+    }
+  }
+
+  function buildCheckoutUrl() {
+    var currentParams = new URLSearchParams(window.location.search);
+    var checkout = new URL(CHECKOUT_URL);
+
+    TRACKING_KEYS.forEach(function(key) {
+      var value = currentParams.get(key) || getStoredValue(key);
+      if (value && !checkout.searchParams.has(key)) {
+        checkout.searchParams.set(key, value);
+      }
+    });
+
+    return checkout.toString();
+  }
+
   // Smart checkout function
   window.goToCheckout = function(e) {
     if (e && e.preventDefault) e.preventDefault();
@@ -2963,9 +3001,7 @@ document.head.appendChild(a);
     if (window._goCheckoutFired) return;
     window._goCheckoutFired = true;
 
-    var base = "https://hub.usepinpay.com/pay/2c94db86-ab01-441c-b96b-3f6767e89e07";
-
-    window.location.href = base;
+    window.location.href = buildCheckoutUrl();
   };
 })();
 </script>
