@@ -2588,7 +2588,7 @@ document.head.appendChild(a);
     </div>
 
     <!-- CTA Button -->
-    <a href="https://pagamento.ateliedepapel.site/pay/2c94db86-ab01-441c-b96b-3f6767e89e07" onclick="goToCheckout(event)" class="po-btn">
+    <a href="javascript:void(0)" onclick="goToCheckout(event)" class="po-btn">
       <span class="po-btn-main">QUERO GARANTIR MINHA PAZ MENTAL AGORA</span>
       <span class="po-btn-sub">Pagamento Seguro</span>
     </a>
@@ -2993,6 +2993,24 @@ document.head.appendChild(a);
     return checkout.toString();
   }
 
+  function trackInitiateCheckout() {
+    if (window._paInitiateCheckoutSent) return;
+    window._paInitiateCheckoutSent = true;
+
+    if (typeof window.fbq !== 'function') return;
+
+    try {
+      window.fbq('track', 'InitiateCheckout', {
+        content_name: 'O Pacote Desliga-Mente',
+        content_category: 'Bordado em Papel Digital',
+        content_ids: ['atelie-papel-desliga-mente'],
+        content_type: 'product',
+        value: 27.00,
+        currency: 'BRL'
+      });
+    } catch (e) {}
+  }
+
   // Smart checkout function
   window.goToCheckout = function(e) {
     if (e && e.preventDefault) e.preventDefault();
@@ -3001,7 +3019,12 @@ document.head.appendChild(a);
     if (window._goCheckoutFired) return;
     window._goCheckoutFired = true;
 
-    window.location.href = buildCheckoutUrl();
+    var checkoutUrl = buildCheckoutUrl();
+    trackInitiateCheckout();
+
+    setTimeout(function() {
+      window.location.href = checkoutUrl;
+    }, 300);
   };
 })();
 </script>
