@@ -2946,6 +2946,73 @@ document.head.appendChild(a);
     });
   }, { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Meta Pixel ViewContent — only when the offer block is actually viewed.
+  (function () {
+    const offer = document.getElementById('offer');
+    if (!offer) return;
+
+    const payload = {
+      content_name: 'O Pacote Desliga-Mente',
+      content_category: 'Bordado em Papel Digital',
+      content_ids: ['atelie-papel-desliga-mente'],
+      content_type: 'product',
+      value: 27.00,
+      currency: 'BRL'
+    };
+
+    let sent = false;
+    let waitingForPixel = false;
+
+    function sendViewContent() {
+      if (sent) return true;
+      if (typeof window.fbq !== 'function') return false;
+
+      window.fbq('track', 'ViewContent', payload);
+      sent = true;
+      return true;
+    }
+
+    function trackWhenPixelIsReady() {
+      if (sent || waitingForPixel) return;
+      if (sendViewContent()) return;
+
+      waitingForPixel = true;
+      let attempts = 0;
+      const retry = setInterval(function () {
+        attempts += 1;
+        if (sendViewContent() || attempts >= 20) {
+          waitingForPixel = false;
+          clearInterval(retry);
+        }
+      }, 250);
+    }
+
+    if ('IntersectionObserver' in window) {
+      const offerObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.25) {
+            trackWhenPixelIsReady();
+            offerObserver.unobserve(offer);
+          }
+        });
+      }, { threshold: [0.25] });
+
+      offerObserver.observe(offer);
+      return;
+    }
+
+    function checkOfferVisibility() {
+      const rect = offer.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.75 && rect.bottom > 0) {
+        trackWhenPixelIsReady();
+        window.removeEventListener('scroll', checkOfferVisibility);
+      }
+    }
+
+    window.addEventListener('scroll', checkOfferVisibility, { passive: true });
+    checkOfferVisibility();
+  })();
 </script>
 
 
